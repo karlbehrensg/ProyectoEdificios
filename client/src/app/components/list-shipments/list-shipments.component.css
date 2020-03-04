@@ -1,0 +1,33 @@
+table {
+  width: 70%;
+  margin: auto;
+}
+
+h2 {
+  margin-left: 1%;
+}
+
+.tittle {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.bar {
+  width: 70%;
+  margin: auto;
+}
+
+.search {
+  margin-left: 35%;
+  width: 15%;
+}
+
+.filters {
+  width: 30%;
+}
+
+.gridFilters {
+  margin-left: 15%;
+}

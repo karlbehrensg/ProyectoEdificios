@@ -1,0 +1,52 @@
+<form class="example-form" [formGroup]="personForm" (ngSubmit)="onSaveForm()">
+  <div class="tittle">
+    <h2>Registrar Visita</h2>
+  </div>
+  <mat-form-field class="example-full-width">
+    <mat-label>Rut</mat-label>
+    <span matPrefix><mat-icon matSuffix>person</mat-icon> &nbsp;</span>
+    <input matInput placeholder="Rut" formControlName="rut" formatRut required>
+    <mat-error *ngIf="rut.errors?.required">
+      Rut es <strong>requerido</strong>
+    </mat-error>
+    <mat-error *ngIf="rut.errors?.invalidRut">
+      Rut es <strong>invalido</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Nombre</mat-label>
+    <span matPrefix><mat-icon matSuffix>person</mat-icon> &nbsp;</span>
+    <input matInput placeholder="Nombre" formControlName="name" required>
+    <mat-error *ngIf="name.errors?.required">
+      Nombre es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Apellido</mat-label>
+    <span matPrefix><mat-icon matSuffix>person</mat-icon> &nbsp;</span>
+    <input matInput placeholder="Apellido" formControlName="lastName" required>
+    <mat-error *ngIf="lastName.errors?.required">
+      Apellido es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Patente</mat-label>
+    <span matPrefix><mat-icon matSuffix>directions_car</mat-icon> &nbsp;</span>
+    <input matInput placeholder="Patente" formControlName="patent"  mask="AA-AA-AA" oninput="this.value = this.value.toUpperCase()">
+    <mat-error *ngIf="patent.errors?.minLength">
+      Patente es <strong>Invalida</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Departamento</mat-label>
+    <span matPrefix><mat-icon matSuffix>apartment</mat-icon> &nbsp;</span>
+    <input matInput placeholder="Departamento" formControlName="dep" required>
+    <mat-error *ngIf="dep.errors?.required">
+      Departamento es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <button class="btn" type="submit" [disabled]="!personForm.valid && !loading" mat-raised-button>
+    <p *ngIf="!loading">Ingresar</p>
+    <mat-spinner class="spinner" diameter="20" *ngIf="loading"></mat-spinner>
+  </button>
+</form>

@@ -1,0 +1,54 @@
+<div class="tittle">
+  <h2>Lista de Encomiendas</h2>
+</div>
+
+<div class="row gridFilters">
+  <mat-form-field class="filters">
+    <mat-label>Filtros</mat-label>
+    <mat-select [formControl]="toppings" multiple (selectionChange)="changeSelect($event)" >
+      <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="search">
+    <mat-label>Buscar</mat-label>
+    <span matPrefix><mat-icon matSuffix>search</mat-icon> &nbsp;</span>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Buscar">
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- fecha Column -->
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+    <td mat-cell *matCellDef="let element"> {{element.date |date:"medium"}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="descripcion">
+    <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <!-- nombre Column -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.person.name}} </td>
+  </ng-container>
+
+  <!-- departamento Column -->
+  <ng-container matColumnDef="departamento">
+    <th mat-header-cell *matHeaderCellDef> Departamento </th>
+    <td mat-cell *matCellDef="let element"> {{element.dep.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="numero">
+    <th mat-header-cell *matHeaderCellDef> Numero </th>
+    <td mat-cell *matCellDef="let element"> {{element.dep.num}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-progress-bar class="bar" *ngIf="loading" mode="indeterminate"></mat-progress-bar>

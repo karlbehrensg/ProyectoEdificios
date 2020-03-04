@@ -1,0 +1,34 @@
+import { prisma } from '../../../generated/prisma-client'
+import getUser from '../../services/getUser.services'
+
+const fragment = `
+  fragment PersonsWithBuild on Person {
+    id
+    rut
+    name
+    email
+    phone
+    lastName
+    dep {
+      num
+    }
+  }
+`
+
+const getPersponsBuild = async (req, res) => {
+
+  const user = getUser(req.headers.authorization)
+
+  if(!user) res.status(500).send({msg: "Usuario no autenticado"})
+
+  const idbuild = await prisma.user({id: user.id}).build()
+
+  if(!idbuild) res.status(500).send({msg: "Edificio no encontrado"})
+  
+  const persons = await prisma.persons({ where: { dep : { building: { id : idbuild.id }}}}).$fragment(fragment)
+
+  if (persons) res.status(200).send({persons})
+  else res.status(500).send({msg: "Error al obtener la Persona"})
+}
+
+export default getPersponsBuild

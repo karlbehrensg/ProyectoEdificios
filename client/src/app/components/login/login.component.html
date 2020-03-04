@@ -1,0 +1,26 @@
+<div class="example-card">
+  <img class="imgsize" src="assets/logo.png">
+  <div class="tittle">
+    <h2>Iniciar Sesión</h2>
+  </div>
+  <mat-form-field class="example-full-width">
+    <mat-label>Email o Username</mat-label>
+    <span matPrefix><mat-icon matSuffix>email</mat-icon> &nbsp;</span>
+    <input matInput name="email" placeholder="Email o Username" #email="ngModel" [(ngModel)]="login.email" required>
+    <mat-error *ngIf="email.errors?.required">
+      Email es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Password</mat-label>
+    <span matPrefix><mat-icon matSuffix>vpn_key</mat-icon> &nbsp;</span>
+    <input matInput type="password" name="password" placeholder="Password" #password="ngModel" [(ngModel)]="login.password" required>
+    <mat-error *ngIf="password.errors?.required">
+      Password es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <button class="btn" [disabled]="(!email.valid || !password.valid) && !loading" (click)="signIn($event)" mat-raised-button>
+    <p *ngIf="!loading">Ingresar</p>
+    <mat-spinner class="spinner" diameter="20" *ngIf="loading"></mat-spinner>
+  </button>
+</div>

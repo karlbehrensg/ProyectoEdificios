@@ -1,0 +1,71 @@
+enum Role {
+  ADMIN
+  USER
+}
+
+type User {
+  id: ID! @id
+  email: String! @unique
+  username: String! @unique
+  password: String!
+  role: Role! @default(value: USER)
+  build: Building @relation(link: INLINE)
+}
+
+type Building {
+  id: ID! @id
+  title: String!
+  deps: [Departament!]!
+  user: User
+}
+
+type Departament {
+  id: ID! @id
+  name: String!
+  num: String!
+  building: Building @relation(link: INLINE)
+  owner: [Person!]!
+  visits: [Visit!]!
+  shipments: [Shipment!]!
+}
+
+type Person {
+  id: ID! @id
+  rut: String! @unique
+  email: String
+  phone: String
+  name: String!
+  lastName: String!
+  dep: Departament @relation(link: INLINE)
+}
+
+type Visit {
+  id: ID! @id
+  date: DateTime! @createdAt
+  patent: String
+  person: PersonVisit! @relation(link: INLINE)
+  depto: Departament! @relation(link: INLINE)
+}
+
+type PersonVisit {
+  id: ID! @id
+  rut: String! @unique
+  name: String!
+  lastName: String!
+  visits: [Visit!]!
+}
+
+type PersonShipmnet {
+  id: ID! @id
+  rut: String! @unique
+  name: String!
+  shipments: [Shipment!]!
+}
+
+type Shipment {
+  id: ID! @id
+  date: DateTime! @createdAt
+  description: String
+  person: PersonShipmnet! @relation(link: INLINE)
+  dep: Departament! @relation(link: INLINE)
+}

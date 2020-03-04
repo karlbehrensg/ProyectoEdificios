@@ -1,0 +1,80 @@
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackConfirmationComponent } from '../snack-confirmation/snack-confirmation.component';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
+  providers: [LoginService]
+})
+export class LoginComponent implements OnInit {
+
+  public login: any;
+  public loading: Boolean
+  public durationInSeconds = 5;
+
+  constructor(
+    private _loginService: LoginService,
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _snackBar: MatSnackBar
+  ) {
+    this.login = {
+      email: '',
+      password: ''
+    }
+    this.loading = false
+  }
+
+  signIn($event) {
+    this.loading = true
+    this._loginService.login(this.login).subscribe(
+      response => {
+        if(response.hash) {
+          localStorage.setItem('token', response.hash)
+          this.loading = false
+        }
+
+        if(response.role) {
+
+          switch (response.role) {
+            case "USER":
+              // Administrador
+              this._router.navigate(["/registrarVisita"]);
+              break;
+            case "ADMIN":
+              // Profesor
+              this._router.navigate([""]);
+              break;
+          }
+        }
+      },
+      error => {
+        this.loading = false
+        if(error.status == 500 && error.error.response == null) {
+          this.loading = false
+          this.openSnackBar({error: error.error})
+        } else {
+          this._snackBar.open(error.error.response, 'OK', {
+            duration: this.durationInSeconds * 1000,
+          });
+        }
+      }
+    );
+  }
+
+  ngOnInit() {
+
+  }
+
+  openSnackBar(mesagge: any) {
+    this._snackBar.openFromComponent(SnackConfirmationComponent, {
+      duration: this.durationInSeconds * 1000,
+      data: mesagge
+    });
+  }
+
+}
