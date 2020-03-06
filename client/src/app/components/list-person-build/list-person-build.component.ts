@@ -47,7 +47,7 @@ export class ListPersonBuildComponent implements OnInit {
       },
       () => {
         this.dataSource.filterPredicate = (data, filter) => {
-          const dataStr = data.name + data.email + data.rut + data.lastName + data.phone + data.dep.num;
+          const dataStr = data.name.toLowerCase() + data.email.toLowerCase() + data.rut.toLowerCase() + data.lastName.toLowerCase() + data.phone.toLowerCase() + data.dep.num.toLowerCase();
           return dataStr.indexOf(filter) != -1;
         }
       }
@@ -74,23 +74,23 @@ export class ListPersonBuildComponent implements OnInit {
       
       switch(data[index]) { 
         case 'Rut': { 
-          dataftr += person.rut
+          dataftr += person.rut.toLowerCase()
           break; 
         } 
         case "Email": { 
-          dataftr += person.email
+          dataftr += person.email.toLowerCase()
           break; 
         } 
         case "Nombre": { 
-          dataftr += person.name
+          dataftr += person.name.toLowerCase()
           break; 
         }
         case "Apellido": { 
-          dataftr += person.lastName 
+          dataftr += person.lastName.toLowerCase()
           break; 
         }
        case "Departamento": { 
-          dataftr += person.dep.num
+          dataftr += person.dep.num.toLowerCase()
           break; 
         } 
       } 

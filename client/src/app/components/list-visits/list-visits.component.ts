@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 
 export interface VisitInterface {
-  date: Date;
+  date: String;
   person: PersonInterface;
   depto: DeptoInterface;
 }
@@ -50,7 +50,7 @@ export class ListVisitsComponent implements OnInit {
       },
       () => {
         this.dataSource.filterPredicate = (data, filter) => {
-          const dataStr = data.date + data.person.rut + data.person.name + data.depto.num + data.depto.name;
+          const dataStr = data.date.toLowerCase() + data.person.rut.toLowerCase() + data.person.name.toLowerCase() + data.depto.num.toLowerCase() + data.depto.name.toLowerCase();
           return dataStr.indexOf(filter) != -1; 
         }
       }
@@ -75,17 +75,17 @@ export class ListVisitsComponent implements OnInit {
 
     for (let index = 0; index < data.length; index++) {
       
-      switch(data[index]) { 
+      switch(data[index]) {
         case 'Rut': { 
-          dataftr += visit.person.rut
+          dataftr += visit.person.rut.toLowerCase()
           break; 
         } 
         case "Nombre": { 
-          dataftr += visit.person.name
+          dataftr += visit.person.name.toLowerCase()
           break; 
         }
        case "Departamento": { 
-          dataftr += visit.depto.num
+          dataftr += visit.depto.num.toLowerCase()
           break; 
         } 
       } 

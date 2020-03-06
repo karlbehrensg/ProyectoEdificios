@@ -1,8 +1,13 @@
 import { prisma } from '../../../generated/prisma-client'
 import bcrypt from 'bcryptjs'
 import { validationResult } from 'express-validator'
+import getUser from '../../services/getUser.services'
 
 const createUser = (req, res) => {
+
+  const user = getUser(req.headers.authorization)
+
+  if(!user) res.status(500).send({msg: "Usuario no autenticado"})
 
   const errors = validationResult(req)
 

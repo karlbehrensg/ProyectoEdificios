@@ -51,8 +51,8 @@ export class ListShipmentsComponent implements OnInit {
       },
       () => {
         this.dataSource.filterPredicate = (data, filter) => {
-          const dataStr = data.date + data.description + data.person.rut + data.person.name +  data.dep.name + data.dep.num;
-          return dataStr.indexOf(filter) != -1; 
+          const dataStr = data.date.toLowerCase() + data.description.toLowerCase() + data.person.rut.toLowerCase() + data.person.name.toLowerCase() +  data.dep.name.toLowerCase() + data.dep.num.toLowerCase();
+          return dataStr.indexOf(filter) != -1;
         }
       }
     )
@@ -78,19 +78,19 @@ export class ListShipmentsComponent implements OnInit {
       
       switch(data[index]) { 
         case 'Rut': { 
-          dataftr += shipment.person.rut
+          dataftr += shipment.person.rut.toLowerCase()
           break; 
         } 
         case "Nombre": { 
-          dataftr += shipment.person.name
+          dataftr += shipment.person.name.toLowerCase()
           break; 
         }
         case "Descripcion": { 
-          dataftr += shipment.description 
+          dataftr += shipment.description.toLowerCase()
           break; 
         }
        case "Departamento": { 
-          dataftr += shipment.dep.num
+          dataftr += shipment.dep.num.toLowerCase()
           break; 
         } 
       } 

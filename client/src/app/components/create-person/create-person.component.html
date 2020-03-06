@@ -46,7 +46,7 @@
   <mat-form-field class="example-full-width">
     <mat-label>Telefono</mat-label>
     <span matPrefix> <mat-icon matSuffix>phone</mat-icon> +569 &nbsp;</span>
-    <input matInput placeholder="Telefono" formControlName="phone" required>
+    <input matInput placeholder="Telefono" formControlName="phone" mask="9999 9999" required>
     <mat-error *ngIf="phone.errors?.required">
       Telefono es <strong>requerido</strong>
     </mat-error>
