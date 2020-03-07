@@ -21,7 +21,7 @@ prisma deploy          // run migrations
 
 prisma generate        // generate lib prisma
 
-node ./prisma/seeds/admin.js  //create user admin
+node ./prisma/seeds/admin.js  //create user admin (user: admin, password: 12345678)
 
 prisma token           // token prisma
 ```
