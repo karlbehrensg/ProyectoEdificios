@@ -27,12 +27,14 @@ services:
     ports:
       - "4200:4200"
     volumes:
-      - './client:/client' 
+      - './client:/client'
+      - /client/node_modules
   express:
     build: server
     ports:
       - "4000:4000"
     volumes:
-      - './server:/server' 
+      - './server:/server'
+      - /server/node_modules
 volumes:
   mysql: ~
