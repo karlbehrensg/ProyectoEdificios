@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
       response => {
         if(response.hash) {
           localStorage.setItem('token', response.hash)
+          localStorage.setItem('role', response.role)
           this.loading = false
         }
 
@@ -42,12 +43,12 @@ export class LoginComponent implements OnInit {
 
           switch (response.role) {
             case "USER":
-              // Administrador
+              // user
               this._router.navigate(["/registrarVisita"]);
               break;
             case "ADMIN":
-              // Profesor
-              this._router.navigate([""]);
+              // administrador
+              this._router.navigate(["registrarVisita"]);
               break;
           }
         }

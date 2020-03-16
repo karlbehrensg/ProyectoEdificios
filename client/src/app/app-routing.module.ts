@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { VisitComponent } from './components/create-visit/visit.component';
 import { AuthGuard } from './guards/logIn/auth.guard';
-import { LogoutGuard } from './guards/logOut/logout.guard';
+import { UserGuard } from './guards/user/user.guard';
 import { Shipment } from './models/shipment';
 import { CreateShipmentComponent } from './components/create-shipment/create-shipment.component';
 import { CreatePersonComponent } from './components/create-person/create-person.component';
@@ -21,37 +21,37 @@ const routes: Routes = [
   {
     path: 'registrarVisita', 
     component: VisitComponent,
-    canActivate: [LogoutGuard],
+    canActivate: [UserGuard],
     data: {animation: 'Visita'}
   },
   {
     path: 'registrarEncomienda',
     component: CreateShipmentComponent,
-    canActivate: [LogoutGuard],
+    canActivate: [UserGuard],
     data: {animation: 'Encomienda'}
   },
   {
     path: 'registrarPersona',
     component: CreatePersonComponent,
-    canActivate: [LogoutGuard],
+    canActivate: [UserGuard],
     data: {animation: 'Residente'}
   },
   {
     path: 'listaVisitas',
     component: ListVisitsComponent,
-    canActivate: [LogoutGuard],
+    canActivate: [UserGuard],
     data: {animation: 'ListaVisita'}
   },
   {
     path: 'listaEncomiendas',
     component: ListShipmentsComponent,
-    canActivate: [LogoutGuard],
+    canActivate: [UserGuard],
     data: {animation: 'ListaEncomienda'}
   },
   {
     path: 'listaPersonas',
     component: ListPersonBuildComponent,
-    canActivate: [LogoutGuard],
+    canActivate: [UserGuard],
     data: {animation: 'ListaPersona'}
   }
 ];

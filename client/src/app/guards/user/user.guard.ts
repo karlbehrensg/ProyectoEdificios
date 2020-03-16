@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class LogoutGuard implements CanActivate {
+export class UserGuard implements CanActivate {
 
   constructor(
     public router: Router
@@ -15,7 +15,7 @@ export class LogoutGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if(localStorage.getItem('token') == null ) { 
+    if(localStorage.getItem('token') == null && localStorage.getItem('role') != "USER") {
       window.alert("Acceso no autorizado!");
       this.router.navigate([''])
     }

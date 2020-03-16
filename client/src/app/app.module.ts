@@ -31,6 +31,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { IConfig } from 'ngx-mask';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { CreateUserComponent } from './components/create-user/create-user.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -44,7 +45,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     ListVisitsComponent,
     ListShipmentsComponent,
     SnackConfirmationComponent,
-    ListPersonBuildComponent
+    ListPersonBuildComponent,
+    CreateUserComponent
   ],
   imports: [
     NgxMaskModule.forRoot(options),

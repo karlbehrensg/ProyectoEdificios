@@ -9,7 +9,8 @@ import { fader } from './animations/animation';
   animations: [fader]
 })
 export class AppComponent implements DoCheck{
-  token = localStorage.getItem('token');
+  public token = localStorage.getItem('token');
+  public role = localStorage.getItem('role');
 
   constructor(
     private _router: Router
@@ -17,15 +18,22 @@ export class AppComponent implements DoCheck{
 
   ngDoCheck() {
     if( this.token == null) {
-      if(localStorage.getItem('token') != null) this.token = localStorage.getItem('token')
+      const token = localStorage.getItem('token')
+      if(token != null) this.token = token
     }
 
+    if( this.role == null) {
+      const role = localStorage.getItem('role')
+      if(role != null) this.role = role
+    }
   }
 
   async signOut(drawer) {
     if(drawer.opened) { await drawer.close() }
     localStorage.removeItem('token')
+    localStorage.removeItem('role')
     this.token = null
+    this.role = null
     this._router.navigate([""]);
   }
 

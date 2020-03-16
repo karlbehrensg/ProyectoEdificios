@@ -1,6 +1,7 @@
 enum Role {
   ADMIN
-  USER
+  BUILD
+  SUPERADMIN
 }
 
 type User {
@@ -8,20 +9,31 @@ type User {
   email: String! @unique
   username: String! @unique
   password: String!
-  role: Role! @default(value: USER)
+  state: Boolean! @default(value: true)
+  role: Role! @default(value: BUILD)
   build: Building @relation(link: INLINE)
+  shipments: [Shipment!]
+  visits: [Visit!]
+  auth: [AuthUser!]
+}
+
+type AuthUser {
+  id: ID! @id
+  login: DateTime! @createdAt
+  logout: DateTime! @updatedAt
+  state: Boolean!
+  user: User! @relation(link: INLINE)
 }
 
 type Building {
   id: ID! @id
-  title: String!
+  title: String! @unique
   deps: [Departament!]!
   user: User
 }
 
 type Departament {
   id: ID! @id
-  name: String!
   num: String!
   building: Building @relation(link: INLINE)
   owner: [Person!]!
@@ -45,12 +57,14 @@ type Visit {
   patent: String
   person: PersonVisit! @relation(link: INLINE)
   depto: Departament! @relation(link: INLINE)
+  user: User! @relation(link: INLINE)
 }
 
 type PersonVisit {
   id: ID! @id
   rut: String! @unique
   name: String!
+  comment: String
   lastName: String!
   visits: [Visit!]!
 }
@@ -68,4 +82,5 @@ type Shipment {
   description: String
   person: PersonShipmnet! @relation(link: INLINE)
   dep: Departament! @relation(link: INLINE)
+  user: User! @relation(link: INLINE)
 }

@@ -24,7 +24,14 @@ const login = async (req, res) => {
 
   if(!valid) res.status(500).send({msg: "Contraseña incorrecta"})
 
-  if( user && valid ) res.status(200).send({hash: await jwt(user), role: user.role})
+  const auth = await prisma.createAuthUser({
+    state: true,
+    user: {
+      connect: { id: user.id }
+    }
+  })
+
+  if( user && valid && auth ) res.status(200).send({hash: await jwt(user), role: user.role})
 
 }
 
