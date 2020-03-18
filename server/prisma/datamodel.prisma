@@ -36,9 +36,16 @@ type Departament {
   id: ID! @id
   num: String!
   building: Building @relation(link: INLINE)
-  owner: [Person!]!
+  owner: [PersonDep!]!
   visits: [Visit!]!
   shipments: [Shipment!]!
+}
+
+type PersonDep {
+  id: ID! @id
+  dep: Departament! @relation(link: INLINE)
+  person: Person! @relation(link: INLINE)
+  state: Boolean!
 }
 
 type Person {
@@ -48,7 +55,7 @@ type Person {
   phone: String
   name: String!
   lastName: String!
-  dep: Departament @relation(link: INLINE)
+  dep: [PersonDep!]!
 }
 
 type Visit {

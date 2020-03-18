@@ -31,7 +31,7 @@ const login = async (req, res) => {
     }
   })
 
-  if( user && valid && auth ) res.status(200).send({hash: await jwt(user), role: user.role})
+  if( user && valid && auth ) res.status(200).send({hash: await jwt(user), role: user.role, sesion: auth.id})
 
 }
 

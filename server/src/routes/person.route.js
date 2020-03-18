@@ -15,6 +15,8 @@ api.post('/createPersonDep', [
     .isLength({min: 3, max: 10}),
   check('lastName', 'lastName is requried')
     .isLength({min: 3, max: 10}),
+  check('phone', 'Phone is requried')
+    .isLength({ min: 9 }),
   check('dep', 'dep is requried')
     .isLength({min: 2, max: 5}),
   ],

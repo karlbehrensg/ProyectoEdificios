@@ -6,6 +6,7 @@ import person_route from './routes/person.route'
 import visit_route from './routes/visit.route'
 import departaments_route from './routes/departaments.route'
 import shipment_route from './routes/shipment.route'
+import build_route from './routes/build.route'
 
 var app = express();
 
@@ -19,6 +20,7 @@ app.use('/api', person_route)
 app.use('/api', visit_route)
 app.use('/api', departaments_route)
 app.use('/api', shipment_route)
+app.use('/api', build_route)
 
 app.listen(4000, function() {
   console.log("el servidor esta escuchando en el puerto " + 4000);

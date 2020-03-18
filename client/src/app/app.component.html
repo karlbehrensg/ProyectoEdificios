@@ -2,25 +2,38 @@
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <mat-toolbar class="toolbarColor">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="'registrarVisita'" routerLinkActive="active-list-item">
+      <a *ngIf="role == 'BUILD'" mat-list-item [routerLink]="'registrarVisita'" routerLinkActive="active-list-item">
         <mat-icon >group</mat-icon>
         Registrar Visita 
       </a>
-      <a mat-list-item [routerLink]="'registrarEncomienda'" routerLinkActive="active-list-item">
-      <mat-icon >business_center</mat-icon>
-      Registrar Encomienda </a>
-      <a mat-list-item [routerLink]="'registrarPersona'" routerLinkActive="active-list-item">
-      <mat-icon >perm_identity</mat-icon>
-      Registrar Residente </a>
-      <a mat-list-item [routerLink]="'listaVisitas'" routerLinkActive="active-list-item">
-      <mat-icon >view_list</mat-icon>
-      Lista Visitas </a>
-      <a mat-list-item [routerLink]="'listaEncomiendas'" routerLinkActive="active-list-item">
-      <mat-icon >view_list</mat-icon>
-      Lista Encomiendas </a>
-      <a mat-list-item [routerLink]="'listaPersonas'" routerLinkActive="active-list-item"> 
-      <mat-icon >apartment</mat-icon>
-      Lista Residentes </a>
+      <a *ngIf="role == 'SUPERADMIN'" mat-list-item [routerLink]="'crearEdificios'" routerLinkActive="active-list-item">
+        <mat-icon >business_center</mat-icon>
+        Crear Edificio 
+      </a>
+      <a *ngIf="role == 'SUPERADMIN'" mat-list-item [routerLink]="'crearDepartamentos'" routerLinkActive="active-list-item">
+        <mat-icon >business_center</mat-icon>
+        Crear Departamento 
+      </a>
+      <a *ngIf="role == 'BUILD'" mat-list-item [routerLink]="'registrarEncomienda'" routerLinkActive="active-list-item">
+        <mat-icon >business_center</mat-icon>
+        Registrar Encomienda 
+      </a>
+      <a *ngIf="role == 'ADMIN'" mat-list-item [routerLink]="'registrarPersona'" routerLinkActive="active-list-item">
+        <mat-icon >perm_identity</mat-icon>
+        Registrar Residente 
+      </a>
+      <a *ngIf="role == 'BUILD' || role == 'ADMIN'" mat-list-item [routerLink]="'listaVisitas'" routerLinkActive="active-list-item">
+        <mat-icon >view_list</mat-icon>
+        Lista Visitas 
+      </a>
+      <a *ngIf="role == 'BUILD' || role == 'ADMIN'" mat-list-item [routerLink]="'listaEncomiendas'" routerLinkActive="active-list-item">
+        <mat-icon >view_list</mat-icon>
+        Lista Encomiendas 
+      </a>
+      <a *ngIf="role == 'BUILD'" mat-list-item [routerLink]="'listaPersonas'" routerLinkActive="active-list-item"> 
+        <mat-icon >apartment</mat-icon>
+        Lista Residentes 
+      </a>
     </mat-nav-list>
   </mat-drawer>
   <mat-toolbar class="toolbarColor">

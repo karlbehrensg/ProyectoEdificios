@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
         if(response.hash) {
           localStorage.setItem('token', response.hash)
           localStorage.setItem('role', response.role)
+          localStorage.setItem('sesion', response.sesion)
           this.loading = false
         }
 
@@ -48,7 +49,11 @@ export class LoginComponent implements OnInit {
               break;
             case "ADMIN":
               // administrador
-              this._router.navigate(["registrarVisita"]);
+              this._router.navigate(["registrarPersona"]);
+              break;
+            case "SUPERADMIN":
+              // super administrador
+              this._router.navigate(["crearEdificios"]);
               break;
           }
         }

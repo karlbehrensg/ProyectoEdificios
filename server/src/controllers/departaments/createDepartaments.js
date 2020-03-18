@@ -16,7 +16,7 @@ const createDepartaments = async (req, res) => {
     return res.status(500).jsonp(errors.array())
   }
 
-  const departaments = await prisma.departaments({ where: { num: req.body.num, building: { id: req.body.build }} })
+  const departaments = await prisma.departaments({ where: { num: req.body.num, building: { id: req.body.build } } })
 
   if (departaments.length == 0) {
 

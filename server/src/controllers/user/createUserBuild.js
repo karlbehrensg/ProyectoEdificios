@@ -3,13 +3,13 @@ import bcrypt from 'bcryptjs'
 import { validationResult } from 'express-validator'
 import getUser from '../../services/getUser.services'
 
-const createUser = (req, res) => {
+const createUserBuild = (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
   if(!user) res.status(500).send({msg: "Usuario no autenticado"})
 
-  if(user.role != "SUPERADMIN") res.status(500).send({msg: "Usuario no autorizado"})
+  if(user.role != "ADMIN") res.status(500).send({msg: "Usuario no autorizado"})
 
   const errors = validationResult(req)
 
@@ -23,10 +23,6 @@ const createUser = (req, res) => {
         email: req.body.email,
         username: req.body.name,
         password: hash,
-        role: "ADMIN",
-        build: {
-          connect: { id: req.body.build }
-        }
       })
       
       if (user) res.status(200).send({msg: "Usuario Creado"})
@@ -35,4 +31,4 @@ const createUser = (req, res) => {
   });
 }
 
-export default createUser
+export default createUserBuild

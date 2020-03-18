@@ -36,6 +36,9 @@ const createshipment = async (req, res) => {
       },
       dep: {
         connect: { id: idbuild[0].id}
+      },
+      user: { 
+        connect: { id: user.id }
       }
     })
 
@@ -55,6 +58,9 @@ const createshipment = async (req, res) => {
       },
       dep: {
         connect: { id: idbuild[0].id}
+      },
+      user: { 
+        connect: { id: user.id }
       }
     })
 

@@ -8,6 +8,8 @@ const createPersonDep = async (req, res) => {
 
   if(!user) res.status(500).send({msg: "Usuario no autenticado"})
 
+  if (user.role != "ADMIN") res.status(500).send({ msg: "Usuario no autorizado" })
+
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
@@ -29,7 +31,14 @@ const createPersonDep = async (req, res) => {
     phone: req.body.phone,
     lastName: req.body.lastName,
     dep: {
-      connect: { id: dep[0].id}
+      create: [
+        { 
+          state: true,
+          dep: {
+            connect: { id: dep[0].id }
+          }
+        }
+      ]
     }
   })
 

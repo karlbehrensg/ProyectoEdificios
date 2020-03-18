@@ -21,4 +21,10 @@ export class LoginService {
     return this._http.post(this.url + '/login', user)
   }
 
+  logout():Observable<any>{
+    const token = localStorage.getItem('token')
+    const session = localStorage.getItem('sesion')
+    return this._http.post(this.url + '/logout', { user: session },  { headers: new HttpHeaders({'Authorization': token})})
+  }
+
 }

@@ -16,6 +16,8 @@ const createPersonVisit = async (req, res) => {
 
   const validePerson = await prisma.personVisit({rut: req.body.rut})
 
+  if(validePerson.comment != null) { res.status(200).send({alert: "Persona con advertencia"}) }
+
   if( validePerson ) {
 
     const idbuild = await prisma.user({id: user.id}).build().deps({where: { num: req.body.dep }})
@@ -29,6 +31,9 @@ const createPersonVisit = async (req, res) => {
       patent: req.body.patent,
       depto: {
         connect: { id: idbuild[0].id }
+      },
+      user: {
+        connect: { id: user.id }
       }
     })
 
@@ -54,6 +59,9 @@ const createPersonVisit = async (req, res) => {
       patent: req.body.patent,
       depto: {
         connect: { id: idbuild[0].id }
+      },
+      user: {
+        connect: { id: user.id }
       }
     })
 

@@ -10,7 +10,9 @@ api.post('/createUser', [
     check('email', 'Email is required')
       .isEmail(),
     check('password', 'Password is requried')
-      .isLength({ min: 4 })
+      .isLength({ min: 4 }),
+    check('build', 'build is required')
+      .isLength({min: 20, max: 40})
   ], 
   UserController.createUser)
 
@@ -21,5 +23,13 @@ api.post('/login', [
       .isLength({ min: 4 })
   ],
   UserController.login)
+
+api.post('/logout', [
+  check('user', 'User is requried')
+    .isLength({ min: 4 })
+],
+UserController.logout)
+
+api.get('/getUsers', UserController.getUsers)
 
 export default api

@@ -10,7 +10,10 @@ const fragment = `
     phone
     lastName
     dep {
-      num
+      state
+      dep {
+        num
+      }
     }
   }
 `
@@ -25,7 +28,7 @@ const getPersponsBuild = async (req, res) => {
 
   if(!idbuild) res.status(500).send({msg: "Edificio no encontrado"})
   
-  const persons = await prisma.persons({ where: { dep : { building: { id : idbuild.id }}}}).$fragment(fragment)
+  const persons = await prisma.persons({ where: { dep_every : { dep: { building: { id : idbuild.id }}, state: true }}}).$fragment(fragment)
 
   if (persons) res.status(200).send({persons})
   else res.status(500).send({msg: "Error al obtener la Persona"})

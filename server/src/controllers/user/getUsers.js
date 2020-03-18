@@ -10,6 +10,11 @@ const fragment = `
     build {
       title
     }
+    auth {
+      login
+      logout
+      state
+    }
   }
 `
 
@@ -19,7 +24,7 @@ const getUsers = async (req, res) => {
 
   if (!user) res.status(500).send({ msg: "Usuario no autenticado" })
 
-  if (user.role != "ADMIN") res.status(500).send({ msg: "Usuario no autorizado" })
+  if (user.role != "SUPERADMIN") res.status(500).send({ msg: "Usuario no autorizado" })
 
   const users = await prisma.users().$fragment(fragment)
 

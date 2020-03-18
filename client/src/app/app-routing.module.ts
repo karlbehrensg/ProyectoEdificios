@@ -10,6 +10,10 @@ import { CreatePersonComponent } from './components/create-person/create-person.
 import { ListVisitsComponent } from './components/list-visits/list-visits.component';
 import { ListShipmentsComponent } from './components/list-shipments/list-shipments.component';
 import { ListPersonBuildComponent } from './components/list-person-build/list-person-build.component';
+import { CreateBuildingComponent } from './components/create-building/create-building.component';
+import { CreateDepartamentComponent } from './components/create-departament/create-departament.component';
+import { SuperadminguardGuard } from './guards/superadmin/superadminguard.guard';
+import { AdminGuard } from './guards/admin/adminguard.guard';
 
 const routes: Routes = [
   {
@@ -33,7 +37,7 @@ const routes: Routes = [
   {
     path: 'registrarPersona',
     component: CreatePersonComponent,
-    canActivate: [UserGuard],
+    canActivate: [AdminGuard],
     data: {animation: 'Residente'}
   },
   {
@@ -53,6 +57,18 @@ const routes: Routes = [
     component: ListPersonBuildComponent,
     canActivate: [UserGuard],
     data: {animation: 'ListaPersona'}
+  },
+  {
+    path: 'crearEdificios',
+    component: CreateBuildingComponent,
+    canActivate: [SuperadminguardGuard],
+    data: {animation: 'crearEdificio'}
+  },
+  {
+    path: 'crearDepartamentos',
+    component: CreateDepartamentComponent,
+    canActivate: [SuperadminguardGuard],
+    data: {animation: 'crearDepartamento'}
   }
 ];
 

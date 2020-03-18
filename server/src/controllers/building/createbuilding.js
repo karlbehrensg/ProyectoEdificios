@@ -21,10 +21,7 @@ const createBuilding = async (req, res) => {
   if (!building) {
 
     const createbuild = await prisma.createBuilding({
-      title: req.body.rut,
-      user: {
-        connect: { id: req.body.user }
-      }
+      title: req.body.title,
     })
 
     if (createbuild) res.status(200).send({msg: "Edificio Creado"})
