@@ -1,1 +1,33 @@
-<p>create-departament works!</p>
+<form class="example-form" [formGroup]="departamentForm" (ngSubmit)="onSaveForm()">
+  <div class="tittle">
+    <h2>Crear Departamento</h2>
+  </div>
+  <mat-form-field class="example-full-width">
+    <mat-label>Numero Departamento</mat-label>
+    <span matPrefix>
+      <mat-icon matSuffix>apartment</mat-icon> &nbsp;
+    </span>
+    <input matInput placeholder="Numero Departamento" formControlName="num" required>
+    <mat-error *ngIf="num.errors?.required">
+      Numero es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Edificio</mat-label>
+    <span matPrefix>
+      <mat-icon matSuffix>apartment</mat-icon> &nbsp;
+    </span>
+    <mat-select formControlName="build">
+      <mat-option *ngFor="let build of builds" [value]="build.id">
+        {{build.title}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="build.errors?.required">
+      Edificio es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <button class="btn" type="submit" [disabled]="!departamentForm.valid && !loading" mat-raised-button>
+    <p *ngIf="!loading">Ingresar</p>
+    <mat-spinner class="spinner" diameter="20" *ngIf="loading"></mat-spinner>
+  </button>
+</form>

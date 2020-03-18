@@ -7,11 +7,11 @@
         Registrar Visita 
       </a>
       <a *ngIf="role == 'SUPERADMIN'" mat-list-item [routerLink]="'crearEdificios'" routerLinkActive="active-list-item">
-        <mat-icon >business_center</mat-icon>
+        <mat-icon >apartment</mat-icon>
         Crear Edificio 
       </a>
       <a *ngIf="role == 'SUPERADMIN'" mat-list-item [routerLink]="'crearDepartamentos'" routerLinkActive="active-list-item">
-        <mat-icon >business_center</mat-icon>
+        <mat-icon >apartment</mat-icon>
         Crear Departamento 
       </a>
       <a *ngIf="role == 'BUILD'" mat-list-item [routerLink]="'registrarEncomienda'" routerLinkActive="active-list-item">
@@ -29,6 +29,10 @@
       <a *ngIf="role == 'BUILD' || role == 'ADMIN'" mat-list-item [routerLink]="'listaEncomiendas'" routerLinkActive="active-list-item">
         <mat-icon >view_list</mat-icon>
         Lista Encomiendas 
+      </a>
+      <a *ngIf="role == 'SUPERADMIN'" mat-list-item [routerLink]="'crearUsuarioAdmin'" routerLinkActive="active-list-item">
+        <mat-icon >perm_identity</mat-icon>
+        Crear Usuario 
       </a>
       <a *ngIf="role == 'BUILD'" mat-list-item [routerLink]="'listaPersonas'" routerLinkActive="active-list-item"> 
         <mat-icon >apartment</mat-icon>

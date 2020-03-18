@@ -1,1 +1,55 @@
-<p>create-user works!</p>
+<form class="example-form" [formGroup]="userForm" (ngSubmit)="onSaveForm()">
+  <div class="tittle">
+    <h2>Crear Administrador Edificio</h2>
+  </div>
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <span matPrefix><mat-icon matSuffix>email</mat-icon> &nbsp;</span>
+    <input matInput placeholder="Email" formControlName="email" required>
+    <mat-error *ngIf="email.errors?.required">
+      Email es <strong>requerido</strong>
+    </mat-error>
+    <mat-error *ngIf="(email.dirty || email.touched) && email.invalid && email.errors?.pattern">
+      Email es <strong>no valido</strong>
+    </mat-error>
+    <mat-error *ngIf="email.errors?.minlength">
+      Email es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Nombre Usuario</mat-label>
+    <span matPrefix>
+      <mat-icon matSuffix>perm_identity</mat-icon> &nbsp;
+    </span>
+    <input matInput placeholder="Nombre Usuario" formControlName="username" required>
+    <mat-error *ngIf="username.errors?.required">
+      Nombre Usuario es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Password</mat-label>
+    <span matPrefix><mat-icon matSuffix>vpn_key</mat-icon> &nbsp;</span>
+    <input matInput type="password" placeholder="Password" formControlName="password" required>
+    <mat-error *ngIf="password.errors?.required">
+      Password es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Edificio</mat-label>
+    <span matPrefix>
+      <mat-icon matSuffix>apartment</mat-icon> &nbsp;
+    </span>
+    <mat-select formControlName="build">
+      <mat-option *ngFor="let build of builds" [value]="build.id">
+        {{build.title}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="build.errors?.required">
+      Edificio es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <button class="btn" type="submit" [disabled]="!userForm.valid && !loading" mat-raised-button>
+    <p *ngIf="!loading">Ingresar</p>
+    <mat-spinner class="spinner" diameter="20" *ngIf="loading"></mat-spinner>
+  </button>
+</form>

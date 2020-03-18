@@ -1,1 +1,19 @@
-<p>create-building works!</p>
+<form class="example-form" [formGroup]="buildForm" (ngSubmit)="onSaveForm()">
+  <div class="tittle">
+    <h2>Crear Edificio</h2>
+  </div>
+  <mat-form-field class="example-full-width">
+    <mat-label>Nombre</mat-label>
+    <span matPrefix>
+      <mat-icon matSuffix>apartment</mat-icon> &nbsp;
+    </span>
+    <input matInput placeholder="Nombre" formControlName="title" required>
+    <mat-error *ngIf="title.errors?.required">
+      Nombre es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <button class="btn" type="submit" [disabled]="!buildForm.valid && !loading" mat-raised-button>
+    <p *ngIf="!loading">Ingresar</p>
+    <mat-spinner class="spinner" diameter="20" *ngIf="loading"></mat-spinner>
+  </button>
+</form>

@@ -14,6 +14,7 @@ import { CreateBuildingComponent } from './components/create-building/create-bui
 import { CreateDepartamentComponent } from './components/create-departament/create-departament.component';
 import { SuperadminguardGuard } from './guards/superadmin/superadminguard.guard';
 import { AdminGuard } from './guards/admin/adminguard.guard';
+import { CreateUserComponent } from './components/create-user/create-user.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,12 @@ const routes: Routes = [
     component: CreateDepartamentComponent,
     canActivate: [SuperadminguardGuard],
     data: {animation: 'crearDepartamento'}
+  },
+  {
+    path: 'crearUsuarioAdmin',
+    component: CreateUserComponent,
+    canActivate: [SuperadminguardGuard],
+    data: {animation: 'crearUserAdmin'}
   }
 ];
 

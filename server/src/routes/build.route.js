@@ -10,4 +10,6 @@ api.post('/createBuild', [
   ],
   BuilController.createbuilding)
 
+api.get('/buildings', BuilController.getBuildings)
+
 export default api

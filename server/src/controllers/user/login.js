@@ -20,6 +20,8 @@ const login = async (req, res) => {
     if(!user) res.status(500).send({msg: "Error: Usuario no existente"})
   }
 
+  if(!user.state) res.status(500).send({msg: "Error: Usuario no activo"})
+
   const valid = await bcrypt.compare(req.body.password, user.password)
 
   if(!valid) res.status(500).send({msg: "Contraseña incorrecta"})
