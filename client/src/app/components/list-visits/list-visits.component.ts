@@ -15,8 +15,7 @@ export interface PersonInterface {
 }
 
 export interface DeptoInterface {
-  num: string; 
-  name: string;
+  num: string;
 }
 
 @Component({
@@ -27,7 +26,7 @@ export interface DeptoInterface {
 })
 export class ListVisitsComponent implements OnInit {
 
-  public displayedColumns: string[] = ['fecha', 'rut', 'nombre', 'departamento', 'numero'];
+  public displayedColumns: string[] = ['fecha', 'rut', 'nombre', 'numero'];
   public dataSource: MatTableDataSource<VisitInterface>;
   public loading: Boolean = true;
   public toppings = new FormControl();
@@ -42,6 +41,7 @@ export class ListVisitsComponent implements OnInit {
     this._visitService.getListVisit().subscribe(
       response => {
         this.loading = false
+        console.log(response)
         this.dataSource = new MatTableDataSource(response.visits);
       },
       error => {
@@ -50,7 +50,7 @@ export class ListVisitsComponent implements OnInit {
       },
       () => {
         this.dataSource.filterPredicate = (data, filter) => {
-          const dataStr = data.date.toLowerCase() + data.person.rut.toLowerCase() + data.person.name.toLowerCase() + data.depto.num.toLowerCase() + data.depto.name.toLowerCase();
+          const dataStr = data.date.toLowerCase() + data.person.rut.toLowerCase() + data.person.name.toLowerCase() + data.depto.num.toLowerCase();
           return dataStr.indexOf(filter) != -1; 
         }
       }

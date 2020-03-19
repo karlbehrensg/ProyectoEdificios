@@ -17,12 +17,19 @@ const createUserBuild = (req, res) => {
     return res.status(500).jsonp(errors.array());
   }
 
+  const valideUser = prisma.user({email: req.body.email})
+
+  if(valideUser) res.status(500).send({msg: "Correo electronico ya existe"})
+
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(req.body.password, salt, async (err, hash) => {
       const user = await prisma.createUser({
         email: req.body.email,
         username: req.body.name,
         password: hash,
+        build: {
+          connect: { id: req.body.build }
+        }
       })
       
       if (user) res.status(200).send({msg: "Usuario Creado"})

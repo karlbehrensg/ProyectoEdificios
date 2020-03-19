@@ -22,4 +22,9 @@ export class UserService {
     return this._http.post(this.url + '/createUser', user,  { headers: new HttpHeaders({'Authorization': token})})
   }
 
+  createUserBuild(user: User):Observable<any>{
+    const token = localStorage.getItem('token')
+    return this._http.post(this.url + '/createUserBuild', user,  { headers: new HttpHeaders({'Authorization': token})})
+  }
+
 }

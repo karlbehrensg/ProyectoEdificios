@@ -6,7 +6,7 @@ var api = express.Router()
 
 api.post('/createUser', [
     check('name', 'Name is requried')
-      .isLength({min: 3, max: 10}),
+      .isLength({min: 3, max: 20}),
     check('email', 'Email is required')
       .isEmail(),
     check('password', 'Password is requried')
@@ -15,6 +15,18 @@ api.post('/createUser', [
       .isLength({min: 20, max: 40})
   ], 
   UserController.createUser)
+
+api.post('/createUserBuild', [
+    check('name', 'Name is requried')
+      .isLength({min: 3, max: 20}),
+    check('email', 'Email is required')
+      .isEmail(),
+    check('password', 'Password is requried')
+      .isLength({ min: 4 }),
+    check('build', 'build is required')
+      .isLength({min: 20, max: 40})
+  ], 
+  UserController.createUserBuild)
 
 api.post('/login', [
     check('email', 'Email is required')
@@ -25,8 +37,8 @@ api.post('/login', [
   UserController.login)
 
 api.post('/logout', [
-  check('user', 'User is requried')
-    .isLength({ min: 4 })
+    check('user', 'User is requried')
+      .isLength({ min: 4 })
 ],
 UserController.logout)
 

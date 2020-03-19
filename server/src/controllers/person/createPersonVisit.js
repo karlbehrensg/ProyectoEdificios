@@ -15,10 +15,10 @@ const createPersonVisit = async (req, res) => {
   }
 
   const validePerson = await prisma.personVisit({rut: req.body.rut})
-
-  if(validePerson.comment != null) { res.status(200).send({alert: "Persona con advertencia"}) }
-
+  
   if( validePerson ) {
+
+    if(validePerson.comment != null) { res.status(200).send({alert: "Persona con advertencia"}) }
 
     const idbuild = await prisma.user({id: user.id}).build().deps({where: { num: req.body.dep }})
   

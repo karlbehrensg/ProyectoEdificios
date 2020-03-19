@@ -34,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { CreateBuildingComponent } from './components/create-building/create-building.component';
 import { CreateDepartamentComponent } from './components/create-departament/create-departament.component';
+import { CreateUserBuildComponent } from './components/create-user-build/create-user-build.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -50,7 +51,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     ListPersonBuildComponent,
     CreateUserComponent,
     CreateBuildingComponent,
-    CreateDepartamentComponent
+    CreateDepartamentComponent,
+    CreateUserBuildComponent
   ],
   imports: [
     NgxMaskModule.forRoot(options),

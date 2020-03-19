@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { BuildService } from 'src/app/services/build.service';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Build } from 'src/app/models/build';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackConfirmationComponent } from '../snack-confirmation/snack-confirmation.component';
+import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BuildService } from 'src/app/services/build.service';
+import { UserService } from 'src/app/services/user.service';
+import { Build } from 'src/app/models/build';
 
 @Component({
-  selector: 'app-create-user',
-  templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.css'],
+  selector: 'app-create-user-build',
+  templateUrl: './create-user-build.component.html',
+  styleUrls: ['./create-user-build.component.css'],
   providers: [UserService, BuildService]
 })
-export class CreateUserComponent implements OnInit {
-  
+export class CreateUserBuildComponent implements OnInit {
+
   public userForm: FormGroup;
   public loading: Boolean
   public durationInSeconds = 5;
@@ -54,7 +54,7 @@ export class CreateUserComponent implements OnInit {
 
   onSaveForm() {
     this.loading = true
-    this._userService.createUserAdmin(this.userForm.value).subscribe(
+    this._userService.createUserBuild(this.userForm.value).subscribe(
       response => {
         this.loading = false
         this._snackBar.open('Creacion de Usuario exitosa', 'OK', {
@@ -78,6 +78,5 @@ export class CreateUserComponent implements OnInit {
       data: mesagge
     });
   }
-  
 
 }

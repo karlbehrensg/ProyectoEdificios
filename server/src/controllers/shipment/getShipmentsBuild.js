@@ -11,7 +11,6 @@ const fragment = `
       name
     }
     dep {
-      name
       num
     }
   }

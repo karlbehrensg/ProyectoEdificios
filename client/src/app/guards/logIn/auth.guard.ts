@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
       const role = localStorage.getItem('role')
       
       switch (role) {
-        case "USER":
+        case "BUILD":
           this.router.navigate(["/registrarVisita"]);
           break;
         case "ADMIN":

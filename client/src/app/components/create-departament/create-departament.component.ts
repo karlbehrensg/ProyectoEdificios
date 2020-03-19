@@ -38,7 +38,7 @@ export class CreateDepartamentComponent implements OnInit {
 
   createForm() {
     return this.fb.group({
-      num: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      num: new FormControl('', [Validators.required, Validators.minLength(1)]),
       build: new FormControl('', [Validators.required, Validators.minLength(5)]),
     });
   }

@@ -11,7 +11,6 @@ export interface ShipmentInterface {
 }
 
 export interface DeptoInterface {
-  name: string;
   num: string;
 }
 
@@ -28,7 +27,7 @@ export interface PersonInterface {
 })
 export class ListShipmentsComponent implements OnInit {
 
-  public displayedColumns: string[] = ['fecha', 'descripcion', 'nombre', 'departamento', 'numero'];
+  public displayedColumns: string[] = ['fecha', 'descripcion', 'nombre', 'numero'];
   public dataSource: MatTableDataSource<ShipmentInterface>;
   public loading: Boolean = true;
   public toppings = new FormControl();
@@ -51,7 +50,7 @@ export class ListShipmentsComponent implements OnInit {
       },
       () => {
         this.dataSource.filterPredicate = (data, filter) => {
-          const dataStr = data.date.toLowerCase() + data.description.toLowerCase() + data.person.rut.toLowerCase() + data.person.name.toLowerCase() +  data.dep.name.toLowerCase() + data.dep.num.toLowerCase();
+          const dataStr = data.date.toLowerCase() + data.description.toLowerCase() + data.person.rut.toLowerCase() + data.person.name.toLowerCase() + data.dep.num.toLowerCase();
           return dataStr.indexOf(filter) != -1;
         }
       }

@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         if(response.role) {
 
           switch (response.role) {
-            case "USER":
+            case "BUILD":
               // user
               this._router.navigate(["/registrarVisita"]);
               break;
