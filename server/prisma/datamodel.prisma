@@ -29,7 +29,7 @@ type Building {
   id: ID! @id
   title: String! @unique
   deps: [Departament!]!
-  user: User
+  user: [User]
 }
 
 type Departament {
@@ -71,9 +71,16 @@ type PersonVisit {
   id: ID! @id
   rut: String! @unique
   name: String!
-  comment: String
+  comment: [CommentVisit]
   lastName: String!
   visits: [Visit!]!
+}
+
+type CommentVisit {
+  id: ID! @id
+  desc: String!
+  state: Boolean @default(value: true)
+  person: PersonVisit @relacion(link: INLINE)
 }
 
 type PersonShipmnet {

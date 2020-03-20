@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { Global } from './global'
 import { User } from '../models/user';
+import { StateUser } from '../models/stateUser';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,16 @@ export class UserService {
   createUserBuild(user: User):Observable<any>{
     const token = localStorage.getItem('token')
     return this._http.post(this.url + '/createUserBuild', user,  { headers: new HttpHeaders({'Authorization': token})})
+  }
+
+  getListUsersBuild():Observable<any>{
+    const token = localStorage.getItem('token');
+    return this._http.get(this.url + '/getUsersBuild', { headers: new HttpHeaders({'Authorization': token})})
+  }
+
+  setStateUser(user: StateUser):Observable<any>{
+    const token = localStorage.getItem('token')
+    return this._http.post(this.url + '/setStateUser', user,  { headers: new HttpHeaders({'Authorization': token})})
   }
 
 }

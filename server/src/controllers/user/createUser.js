@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs'
 import { validationResult } from 'express-validator'
 import getUser from '../../services/getUser.services'
 
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
@@ -17,7 +17,7 @@ const createUser = (req, res) => {
     return res.status(500).jsonp(errors.array());
   }
 
-  const valideUser = prisma.user({email: req.body.email})
+  const valideUser = await prisma.user({email: req.body.email})
 
   if(valideUser) res.status(500).send({msg: "Correo electronico ya existe"})
 

@@ -6,6 +6,7 @@ const fragment = `
     id
     date
     person {
+      id
       rut
       name
     }

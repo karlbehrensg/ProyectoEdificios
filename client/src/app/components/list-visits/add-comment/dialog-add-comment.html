@@ -1,0 +1,19 @@
+<div class="example-card">
+  <div class="tittle">
+    <h2>Iniciar Sesión</h2>
+  </div>
+  <mat-form-field class="example-full-width">
+    <mat-label>Observacion</mat-label>
+    <span matPrefix>
+      <mat-icon matSuffix>edit</mat-icon> &nbsp;
+    </span>
+    <textarea matInput name="desc" placeholder="Observacion" #desc="ngModel" [(ngModel)]="obs.desc" required></textarea>
+    <mat-error *ngIf="desc.errors?.required">
+      Observacion es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <button class="btn" [disabled]="!desc.valid && !loading" (click)="addComment()" mat-raised-button>
+    <p *ngIf="!loading">Ingresar</p>
+    <mat-spinner class="spinner" diameter="20" *ngIf="loading"></mat-spinner>
+  </button>
+</div>

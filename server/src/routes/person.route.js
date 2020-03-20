@@ -16,7 +16,7 @@ api.post('/createPersonDep', [
   check('lastName', 'lastName is requried')
     .isLength({min: 3, max: 10}),
   check('phone', 'Phone is requried')
-    .isLength({ min: 9 }),
+    .isLength({ min: 8 }),
   check('dep', 'dep is requried')
     .isLength({min: 2, max: 5}),
   ],
@@ -38,7 +38,22 @@ api.post('/createPersonVisit', [
   ], 
   PersonController.createPersonVisit)
 
-//api.post('/getPersonsDepsBuild', PersonController.getPersonsDepsBuild)
 api.post('/getPerponsBuild', PersonController.getPersponsBuild)
+
+api.post('/createCommentPerson', [
+  check('desc', 'description is requried')
+    .isLength({min: 1, max: 100}),
+  check('person', 'id person is requried')
+    .isLength({min: 10, max: 30}),
+  ],
+  PersonController.createPersonVisitComment)
+
+api.post('/inactiveComment', [
+  check('comment', 'id comment is requried')
+    .isLength({min: 10, max: 30}),
+  ],
+  PersonController.inactiveCommentPerson)
+
+
 
 export default api

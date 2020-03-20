@@ -28,11 +28,15 @@ h2 {
   width: 30%;
 }
 
+.btnmargin {
+  margin-right: 10;
+}
+
 .gridFilters {
   margin-left: 15%;
 }
 
-.mat-column-function {
+.mat-column-auth {
   text-align: right;
   justify-content: flex-end;
 }

@@ -22,7 +22,7 @@
         <mat-icon >perm_identity</mat-icon>
         Registrar Residente 
       </a>
-      <a *ngIf="role == 'BUILD'" mat-list-item [routerLink]="'listaVisitas'" routerLinkActive="active-list-item">
+      <a *ngIf="role == 'BUILD' || role == 'ADMIN'" mat-list-item [routerLink]="'listaVisitas'" routerLinkActive="active-list-item">
         <mat-icon >view_list</mat-icon>
         Lista Visitas 
       </a>
@@ -38,9 +38,13 @@
         <mat-icon >perm_identity</mat-icon>
         Crear Concerje
       </a>
-      <a *ngIf="role == 'BUILD'" mat-list-item [routerLink]="'listaPersonas'" routerLinkActive="active-list-item"> 
+      <a *ngIf="role == 'ADMIN'" mat-list-item [routerLink]="'listaPersonas'" routerLinkActive="active-list-item"> 
         <mat-icon >apartment</mat-icon>
         Lista Residentes 
+      </a>
+      <a *ngIf="role == 'ADMIN'" mat-list-item [routerLink]="'listaUsuariosEdificio'" routerLinkActive="active-list-item">
+        <mat-icon >view_list</mat-icon>
+        Lista Usuarios  
       </a>
     </mat-nav-list>
   </mat-drawer>

@@ -1,0 +1,24 @@
+<div class="tittle">
+  <h2>Logs Usuarios Concerjes</h2>
+</div>
+
+<table mat-table [dataSource]="dataSource.auths" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="login">
+    <th mat-header-cell *matHeaderCellDef> LogIn </th>
+    <td mat-cell *matCellDef="let element"> {{element.login |date:"medium"}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="logout">
+    <th mat-header-cell *matHeaderCellDef> LogOut </th>
+    <td mat-cell *matCellDef="let element"> {{element.logout |date:"medium"}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef> Estado </th>
+    <td mat-cell *matCellDef="let element"> {{element.state ? 'Conectado' : 'Desconectado'}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

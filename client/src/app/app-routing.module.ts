@@ -16,6 +16,8 @@ import { SuperadminguardGuard } from './guards/superadmin/superadminguard.guard'
 import { AdminGuard } from './guards/admin/adminguard.guard';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { CreateUserBuildComponent } from './components/create-user-build/create-user-build.component';
+import { ListUsersBuildComponent } from './components/list-users-build/list-users-build.component';
+import { AdminUserGuard } from './guards/adminuser/admin-user.guard';
 
 const routes: Routes = [
   {
@@ -45,7 +47,7 @@ const routes: Routes = [
   {
     path: 'listaVisitas',
     component: ListVisitsComponent,
-    canActivate: [UserGuard],
+    canActivate: [AdminUserGuard],
     data: {animation: 'ListaVisita'}
   },
   {
@@ -57,7 +59,7 @@ const routes: Routes = [
   {
     path: 'listaPersonas',
     component: ListPersonBuildComponent,
-    canActivate: [UserGuard],
+    canActivate: [AdminGuard],
     data: {animation: 'ListaPersona'}
   },
   {
@@ -83,6 +85,12 @@ const routes: Routes = [
     component: CreateUserBuildComponent,
     canActivate: [AdminGuard],
     data: {animation: 'crearConserje'}
+  },
+  {
+    path: 'listaUsuariosEdificio',
+    component: ListUsersBuildComponent,
+    canActivate: [AdminGuard],
+    data: {animation: 'listaUsuarioEdificio'}
   }
 ];
 

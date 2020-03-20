@@ -35,6 +35,9 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 import { CreateBuildingComponent } from './components/create-building/create-building.component';
 import { CreateDepartamentComponent } from './components/create-departament/create-departament.component';
 import { CreateUserBuildComponent } from './components/create-user-build/create-user-build.component';
+import { ListUsersBuildComponent, DialogListAuth } from './components/list-users-build/list-users-build.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogAddComment } from './components/list-visits/add-comment/add-comment.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -52,7 +55,10 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     CreateUserComponent,
     CreateBuildingComponent,
     CreateDepartamentComponent,
-    CreateUserBuildComponent
+    CreateUserBuildComponent,
+    ListUsersBuildComponent,
+    DialogListAuth,
+    DialogAddComment
   ],
   imports: [
     NgxMaskModule.forRoot(options),
@@ -77,10 +83,11 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatSnackBarModule,
     MatProgressBarModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [RutValidator],
   bootstrap: [AppComponent],
-  entryComponents: [CreatePersonComponent, SnackConfirmationComponent],
+  entryComponents: [CreatePersonComponent, SnackConfirmationComponent, DialogListAuth, DialogAddComment],
 })
 export class AppModule { }

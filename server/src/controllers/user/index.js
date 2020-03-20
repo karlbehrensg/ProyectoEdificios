@@ -4,6 +4,7 @@ import getUsers from './getUsers'
 import inactiveUser from './inactiveUser'
 import createUserBuild from './createUserBuild'
 import logout from './logout'
+import getUsersBuild from './getUserBuild'
 
 export default {
   createUser,
@@ -11,5 +12,6 @@ export default {
   getUsers,
   inactiveUser,
   createUserBuild,
-  logout
+  logout,
+  getUsersBuild
 }

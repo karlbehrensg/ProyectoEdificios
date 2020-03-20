@@ -1,0 +1,13 @@
+table {
+  width: 90%;
+  margin: auto;
+}
+
+
+.tittle {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+

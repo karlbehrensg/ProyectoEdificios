@@ -36,6 +36,13 @@ api.post('/login', [
   ],
   UserController.login)
 
+api.post('/setStateUser', [
+    check('state', 'state is required')
+      .isBoolean(),
+    check('user', 'user is requried')
+  ],
+  UserController.inactiveUser)
+
 api.post('/logout', [
     check('user', 'User is requried')
       .isLength({ min: 4 })
@@ -43,5 +50,7 @@ api.post('/logout', [
 UserController.logout)
 
 api.get('/getUsers', UserController.getUsers)
+
+api.get('/getUsersBuild', UserController.getUsersBuild)
 
 export default api

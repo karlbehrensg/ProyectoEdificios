@@ -28,7 +28,7 @@ const createPersonDep = async (req, res) => {
     rut: req.body.rut,
     email: req.body.email,
     name: req.body.name,
-    phone: req.body.phone,
+    phone: "9" + req.body.phone,
     lastName: req.body.lastName,
     dep: {
       create: [

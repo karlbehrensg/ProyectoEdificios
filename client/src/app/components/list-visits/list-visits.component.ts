@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VisitService } from 'src/app/services/visit.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAddComment } from './add-comment/add-comment.component';
 
 export interface VisitInterface {
   date: String;
@@ -26,7 +28,7 @@ export interface DeptoInterface {
 })
 export class ListVisitsComponent implements OnInit {
 
-  public displayedColumns: string[] = ['fecha', 'rut', 'nombre', 'numero'];
+  public displayedColumns: string[] = ['fecha', 'rut', 'nombre', 'numero', 'function'];
   public dataSource: MatTableDataSource<VisitInterface>;
   public loading: Boolean = true;
   public toppings = new FormControl();
@@ -34,6 +36,7 @@ export class ListVisitsComponent implements OnInit {
 
   constructor(
     private _visitService: VisitService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -93,4 +96,14 @@ export class ListVisitsComponent implements OnInit {
     return dataftr;
   }
 
+  addComment(id: String) {
+    const dialogRef = this.dialog.open(DialogAddComment, {
+      width: '1000px',
+      data: { id }
+    });
+  }
+
+  listComment(id) {
+
+  }
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs'
 import { Global } from './global'
 import { Person } from '../models/person';
 import { PersonVisit } from '../models/personvisit'
+import { CommentPerson } from '../models/commentPerson';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +28,15 @@ export class PersonService {
     const token = localStorage.getItem('token');
     return this._http.post(this.url + '/createPersonVisit', person, { headers: new HttpHeaders({'Authorization': token})})
   }
-
+  
   getPersons(): Observable<any>{
     const token = localStorage.getItem('token');
     return this._http.post(this.url + '/getPerponsBuild', { data : '' }, { headers: new HttpHeaders({'Authorization': token})})
+  }
+
+  createCommentPerson(data: CommentPerson): Observable<any>{
+    const token = localStorage.getItem('token');
+    return this._http.post(this.url + '/createCommentPerson', data, { headers: new HttpHeaders({'Authorization': token})})
   }
 
 }

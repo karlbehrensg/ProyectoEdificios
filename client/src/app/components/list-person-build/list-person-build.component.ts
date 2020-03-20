@@ -3,14 +3,19 @@ import { PersonService } from 'src/app/services/person.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 
+export interface DeptoStateInterface {
+  state: Boolean;
+  dep: DeptoInterface;
+}
+
 export interface DeptoInterface {
-  num: string
+  num: String;
 }
 
 export interface PersonInterface {
   name: string;
   email: string;
-  dep: DeptoInterface;
+  dep: [DeptoStateInterface];
   rut: string;
   lastName: string;
   phone: string;
@@ -47,7 +52,7 @@ export class ListPersonBuildComponent implements OnInit {
       },
       () => {
         this.dataSource.filterPredicate = (data, filter) => {
-          const dataStr = data.name.toLowerCase() + data.email.toLowerCase() + data.rut.toLowerCase() + data.lastName.toLowerCase() + data.phone.toLowerCase() + data.dep.num.toLowerCase();
+          const dataStr = data.name.toLowerCase() + data.email.toLowerCase() + data.rut.toLowerCase() + data.lastName.toLowerCase() + data.phone.toLowerCase() + data.dep[0].dep.num.toLowerCase();
           return dataStr.indexOf(filter) != -1;
         }
       }
@@ -90,7 +95,7 @@ export class ListPersonBuildComponent implements OnInit {
           break; 
         }
        case "Departamento": { 
-          dataftr += person.dep.num.toLowerCase()
+          dataftr += person.dep[0].dep.num.toLowerCase()
           break; 
         } 
       } 

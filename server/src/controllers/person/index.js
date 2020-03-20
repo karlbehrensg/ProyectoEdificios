@@ -3,7 +3,8 @@ import createPersonVisit from './createPersonVisit'
 import getPersonsDepsBuild from './getPersonsDepsBuild'
 import getPersponsBuild from './getPersponsBuild'
 import assignPersonDep from './assignPersonDep'
-import createComment from './createCommentPerson'
+import createPersonVisitComment from './createPersonVisitComment'
+import inactiveCommentPerson from './inactiveCommentPerson'
 
 export default {
   createPersonDep,
@@ -11,5 +12,6 @@ export default {
   getPersonsDepsBuild,
   getPersponsBuild,
   assignPersonDep,
-  createComment
+  createPersonVisitComment,
+  inactiveCommentPerson
 }
