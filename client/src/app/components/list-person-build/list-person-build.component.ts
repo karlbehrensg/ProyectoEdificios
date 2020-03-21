@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { PersonService } from 'src/app/services/person.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface DeptoStateInterface {
   state: Boolean;
   dep: DeptoInterface;
+  person: PersonInterface
 }
 
 export interface DeptoInterface {
@@ -15,7 +17,6 @@ export interface DeptoInterface {
 export interface PersonInterface {
   name: string;
   email: string;
-  dep: [DeptoStateInterface];
   rut: string;
   lastName: string;
   phone: string;
@@ -29,14 +30,16 @@ export interface PersonInterface {
 })
 export class ListPersonBuildComponent implements OnInit {
 
-  public displayedColumns: string[] = ['rut', 'email', 'nombre', 'apellido', 'departamento'];
-  public dataSource: MatTableDataSource<PersonInterface>;
+  public displayedColumns: string[] = ['rut', 'email', 'nombre', 'apellido', 'departamento', 'function'];
+  public dataSource: MatTableDataSource<DeptoStateInterface>;
   public loading: Boolean = true;
   public toppings = new FormControl();
   public toppingList: string[] = ['Rut', 'Email', 'Nombre', 'Apellido', 'Departamento'];
-  
+  public durationInSeconds = 5;
+
   constructor(
-    private _personService: PersonService
+    private _personService: PersonService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -52,7 +55,7 @@ export class ListPersonBuildComponent implements OnInit {
       },
       () => {
         this.dataSource.filterPredicate = (data, filter) => {
-          const dataStr = data.name.toLowerCase() + data.email.toLowerCase() + data.rut.toLowerCase() + data.lastName.toLowerCase() + data.phone.toLowerCase() + data.dep[0].dep.num.toLowerCase();
+          const dataStr = data.person.name.toLowerCase() + data.person.email.toLowerCase() + data.person.rut.toLowerCase() + data.person.lastName.toLowerCase() + data.person.phone.toLowerCase() + data.dep.num.toLowerCase();
           return dataStr.indexOf(filter) != -1;
         }
       }
@@ -71,7 +74,7 @@ export class ListPersonBuildComponent implements OnInit {
     this.dataSource.filter = filterValue.trim();
   }
 
-  selectChecked(data: String[], person: PersonInterface): String {
+  selectChecked(data: String[], person: DeptoStateInterface): String {
 
     var dataftr = ''
 
@@ -79,28 +82,48 @@ export class ListPersonBuildComponent implements OnInit {
       
       switch(data[index]) { 
         case 'Rut': { 
-          dataftr += person.rut.toLowerCase()
+          dataftr += person.person.rut.toLowerCase()
           break; 
         } 
         case "Email": { 
-          dataftr += person.email.toLowerCase()
+          dataftr += person.person.email.toLowerCase()
           break; 
         } 
         case "Nombre": { 
-          dataftr += person.name.toLowerCase()
+          dataftr += person.person.name.toLowerCase()
           break; 
         }
         case "Apellido": { 
-          dataftr += person.lastName.toLowerCase()
+          dataftr += person.person.lastName.toLowerCase()
           break; 
         }
        case "Departamento": { 
-          dataftr += person.dep[0].dep.num.toLowerCase()
+          dataftr += person.dep.num.toLowerCase()
           break; 
         } 
       } 
     }
     return dataftr;
+  }
+
+  desactiveDep(id: String) {
+    this._personService.desactivePersonDep(id).subscribe(
+      response => {
+        this._snackBar.open('Desactivado', 'OK', {
+          duration: this.durationInSeconds * 1000,
+        });
+        this._personService.getPersons().subscribe(
+          response => {
+            this.dataSource = new MatTableDataSource(response.persons);
+          }
+        )
+      },
+      error => {
+        this._snackBar.open('Error al desactivar', 'OK', {
+          duration: this.durationInSeconds * 1000,
+        });
+      }
+    )
   }
 
 }

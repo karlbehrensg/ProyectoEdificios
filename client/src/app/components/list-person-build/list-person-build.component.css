@@ -31,3 +31,8 @@ h2 {
 .gridFilters {
   margin-left: 15%;
 }
+
+.mat-column-function {
+  text-align: right;
+  justify-content: flex-end;
+}

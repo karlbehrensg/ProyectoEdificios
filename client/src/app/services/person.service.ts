@@ -5,6 +5,7 @@ import { Global } from './global'
 import { Person } from '../models/person';
 import { PersonVisit } from '../models/personvisit'
 import { CommentPerson } from '../models/commentPerson';
+import { PersonDep } from '../models/personDep';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +48,15 @@ export class PersonService {
   inactiveComment(data: String, state: Boolean): Observable<any>{
     const token = localStorage.getItem('token');
     return this._http.post(this.url + '/inactiveComment', { comment: data, state: state }, { headers: new HttpHeaders({'Authorization': token})})
+  }
+
+  desactivePersonDep(data: String): Observable<any>{
+    const token = localStorage.getItem('token');
+    return this._http.post(this.url + '/desactivePersonDep', { person: data }, { headers: new HttpHeaders({'Authorization': token})})
+  }
+
+  assignPersonDep(data: PersonDep): Observable<any>{
+    const token = localStorage.getItem('token');
+    return this._http.post(this.url + '/assignPersonDep', data, { headers: new HttpHeaders({'Authorization': token})})
   }
 }

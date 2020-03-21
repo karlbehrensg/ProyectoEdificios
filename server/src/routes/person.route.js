@@ -62,6 +62,21 @@ api.post('/getCommentPerson', [
   ],
   PersonController.getCommentPerson)
 
+api.post('/assignPersonDep', [
+  check('person', 'rut is requried').custom(value => {
+    return rut.validar(String(value).toUpperCase());
+  }),
+  check('dep', 'id dep is requried')
+    .isLength({min: 1, max: 10}),
+  ],
+  PersonController.assignPersonDep)
+
+api.post('/desactivePersonDep', [
+  check('person', 'id person is requried')
+    .isLength({min: 10, max: 30}),
+  ],
+  PersonController.desactivePersonDep)
+
 
 
 export default api

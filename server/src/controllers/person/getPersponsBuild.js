@@ -2,18 +2,18 @@ import { prisma } from '../../../generated/prisma-client'
 import getUser from '../../services/getUser.services'
 
 const fragment = `
-  fragment PersonsWithBuild on Person {
+  fragment PersonsWithBuild on PersonDep {
     id
-    rut
-    name
-    email
-    phone
-    lastName
+    state
     dep {
-      state
-      dep {
-        num
-      }
+      num
+    }
+    person {
+      rut
+      name
+      email
+      phone
+      lastName
     }
   }
 `
@@ -28,7 +28,7 @@ const getPersponsBuild = async (req, res) => {
 
   if(!idbuild) return res.status(500).send({msg: "Edificio no encontrado"})
   
-  const persons = await prisma.persons({ where: { dep_every : { dep: { building: { id : idbuild.id }}, state: true }}}).$fragment(fragment)
+  const persons = await prisma.personDeps({where: { state: true, dep: { building: { id: idbuild.id } } }}).$fragment(fragment)
 
   if (persons) return res.status(200).send({persons})
   else return res.status(500).send({msg: "Error al obtener la Persona"})

@@ -18,6 +18,7 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 import { CreateUserBuildComponent } from './components/create-user-build/create-user-build.component';
 import { ListUsersBuildComponent } from './components/list-users-build/list-users-build.component';
 import { AdminUserGuard } from './guards/adminuser/admin-user.guard';
+import { AssignResidentComponent } from './components/assign-resident/assign-resident.component';
 
 const routes: Routes = [
   {
@@ -91,6 +92,12 @@ const routes: Routes = [
     component: ListUsersBuildComponent,
     canActivate: [AdminGuard],
     data: {animation: 'listaUsuarioEdificio'}
+  },
+  {
+    path: 'asignarResidentes',
+    component: AssignResidentComponent,
+    canActivate: [AdminGuard],
+    data: {animation: 'asignarResidente'}
   }
 ];
 

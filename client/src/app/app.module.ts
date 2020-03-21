@@ -39,6 +39,7 @@ import { ListUsersBuildComponent, DialogListAuth } from './components/list-users
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogAddComment } from './components/list-visits/add-comment/add-comment.component';
 import { DialogListComment } from './components/list-visits/list-comment/list-comment.component';
+import { AssignResidentComponent } from './components/assign-resident/assign-resident.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -60,7 +61,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     ListUsersBuildComponent,
     DialogListAuth,
     DialogAddComment,
-    DialogListComment
+    DialogListComment,
+    AssignResidentComponent
   ],
   imports: [
     NgxMaskModule.forRoot(options),

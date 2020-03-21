@@ -38,6 +38,10 @@
         <mat-icon >perm_identity</mat-icon>
         Crear Concerje
       </a>
+      <a *ngIf="role == 'ADMIN'" mat-list-item [routerLink]="'asignarResidentes'" routerLinkActive="active-list-item">
+        <mat-icon >perm_identity</mat-icon>
+        Asignar Residentes
+      </a>
       <a *ngIf="role == 'ADMIN'" mat-list-item [routerLink]="'listaPersonas'" routerLinkActive="active-list-item"> 
         <mat-icon >apartment</mat-icon>
         Lista Residentes 

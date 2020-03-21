@@ -1,0 +1,30 @@
+<form class="example-form" [formGroup]="personForm" (ngSubmit)="onSaveForm()">
+  <div class="tittle">
+    <h2>Asignar Residentes</h2>
+  </div>
+  <mat-form-field class="example-full-width">
+    <mat-label>Rut</mat-label>
+    <span matPrefix><mat-icon matSuffix>person</mat-icon> &nbsp;</span>
+    <input matInput placeholder="Rut" formControlName="person" formatRut required>
+    <mat-error *ngIf="person.errors?.required">
+      Rut es <strong>requerido</strong>
+    </mat-error>
+    <mat-error *ngIf="person.errors?.invalidRut">
+      Rut es <strong>invalido</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Numero</mat-label>
+    <span matPrefix>
+      <mat-icon matSuffix>apartment</mat-icon> &nbsp;
+    </span>
+    <input matInput placeholder="Numero de Departamento" formControlName="dep" required>
+    <mat-error *ngIf="dep.errors?.required">
+      Departamento es <strong>requerido</strong>
+    </mat-error>
+  </mat-form-field>
+  <button class="btn" type="submit" [disabled]="!personForm.valid && !loading" mat-raised-button>
+    <p *ngIf="!loading">Ingresar</p>
+    <mat-spinner class="spinner" diameter="20" *ngIf="loading"></mat-spinner>
+  </button>
+</form>
