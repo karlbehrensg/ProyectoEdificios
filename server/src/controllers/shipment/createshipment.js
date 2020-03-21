@@ -6,7 +6,7 @@ const createshipment = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
-  if(!user) res.status(500).send({msg: "Usuario no autenticado"})
+  if(!user) return res.status(500).send({msg: "Usuario no autenticado"})
 
   const errors = validationResult(req)
 
@@ -20,14 +20,14 @@ const createshipment = async (req, res) => {
 
     const idbuild = await prisma.user({id: user.id}).build().deps({where: { num: req.body.dep }})
   
-    if( idbuild.length == 0 ) res.status(500).send({msg: "Departamento no encontrado"})
+    if( idbuild.length == 0 ) return res.status(500).send({msg: "Departamento no encontrado"})
 
     const personShipment = await prisma.createPersonShipmnet({
       rut: req.body.rut,
       name: req.body.name
     })
 
-    if(!personShipment) res.status(500).send({msg: "Error al crear la persona"})
+    if(!personShipment) return res.status(500).send({msg: "Error al crear la persona"})
 
     const shipment = await prisma.createShipment({
       description: req.body.description,
@@ -42,14 +42,14 @@ const createshipment = async (req, res) => {
       }
     })
 
-    if (shipment) res.status(200).send({msg: "Encomienda Creado"})
-    else res.status(500).send({msg: "Error al crear la Visita"})
+    if (shipment) return res.status(200).send({msg: "Encomienda Creado"})
+    else return res.status(500).send({msg: "Error al crear la Visita"})
 
   } else {
 
     const idbuild = await prisma.user({id: user.id}).build().deps({where: { num: req.body.dep }})
   
-    if( idbuild.length == 0 ) res.status(500).send({msg: "Departamento no encontrado"})
+    if( idbuild.length == 0 ) return res.status(500).send({msg: "Departamento no encontrado"})
 
     const shipment = await prisma.createShipment({
       description: req.body.description,
@@ -64,8 +64,8 @@ const createshipment = async (req, res) => {
       }
     })
 
-    if (shipment) res.status(200).send({msg: "Encomienda Creado"})
-    else res.status(500).send({msg: "Error al crear la Visita"})
+    if (shipment) return res.status(200).send({msg: "Encomienda Creado"})
+    else return res.status(500).send({msg: "Error al crear la Visita"})
 
   }
 }

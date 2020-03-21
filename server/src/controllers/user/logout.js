@@ -5,7 +5,7 @@ const logout = async (req, res) => {
 
 	const user = getUser(req.headers.authorization)
 
-	if (!user) res.status(500).send({ msg: "Usuario no autenticado" })
+	if (!user) return res.status(500).send({ msg: "Usuario no autenticado" })
 
 	const logout = await prisma.updateAuthUser({
 		data: { state: false },
@@ -14,8 +14,8 @@ const logout = async (req, res) => {
 		}
 	})
 
-	if (logout) res.status(200).send({msg: "Sesion cerrada con exito"})
-	else res.status(500).send({msg: "Error al cerrar sesion"})
+	if (logout) return res.status(200).send({msg: "Sesion cerrada con exito"})
+	else return res.status(500).send({msg: "Error al cerrar sesion"})
 }
 
 export default logout

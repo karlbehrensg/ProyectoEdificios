@@ -22,16 +22,16 @@ const getPersponsBuild = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
-  if(!user) res.status(500).send({msg: "Usuario no autenticado"})
+  if(!user) return res.status(500).send({msg: "Usuario no autenticado"})
 
   const idbuild = await prisma.user({id: user.id}).build()
 
-  if(!idbuild) res.status(500).send({msg: "Edificio no encontrado"})
+  if(!idbuild) return res.status(500).send({msg: "Edificio no encontrado"})
   
   const persons = await prisma.persons({ where: { dep_every : { dep: { building: { id : idbuild.id }}, state: true }}}).$fragment(fragment)
 
-  if (persons) res.status(200).send({persons})
-  else res.status(500).send({msg: "Error al obtener la Persona"})
+  if (persons) return res.status(200).send({persons})
+  else return res.status(500).send({msg: "Error al obtener la Persona"})
 }
 
 export default getPersponsBuild

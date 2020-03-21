@@ -7,9 +7,9 @@ const createUserBuild = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
-  if(!user) res.status(500).send({msg: "Usuario no autenticado"})
+  if(!user) return res.status(500).send({msg: "Usuario no autenticado"})
 
-  if(user.role != "ADMIN") res.status(500).send({msg: "Usuario no autorizado"})
+  if(user.role != "ADMIN") return res.status(500).send({msg: "Usuario no autorizado"})
 
   const errors = validationResult(req)
 
@@ -19,7 +19,7 @@ const createUserBuild = async (req, res) => {
 
   const valideUser = await prisma.user({email: req.body.email})
 
-  if(valideUser) res.status(500).send({msg: "Correo electronico ya existe"})
+  if(valideUser) return res.status(500).send({msg: "Correo electronico ya existe"})
 
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(req.body.password, salt, async (err, hash) => {
@@ -32,8 +32,8 @@ const createUserBuild = async (req, res) => {
         }
       })
       
-      if (user) res.status(200).send({msg: "Usuario Creado"})
-      else res.status(500).send({msg: "Error al crear el Usuario"})
+      if (user) return res.status(200).send({msg: "Usuario Creado"})
+      else return res.status(500).send({msg: "Error al crear el Usuario"})
     });
   });
 }

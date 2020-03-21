@@ -60,10 +60,14 @@ export class VisitComponent {
         if(error.status == 500 && error.error.msg == null) {
           this.openSnackBar({error: error.error})
         }
+        if(error.status == 500 && error.error.alert == null) {
+          this.openSnackBar({error: error.error.alert})
+        }
         if(error.status == 500 && error.error.msg != null) {
           this.openSnackBar({error: [{msg: error.error.msg}]})
+        }
       }
-    });
+    );
   }
 
   openSnackBar(mesagge: any) {

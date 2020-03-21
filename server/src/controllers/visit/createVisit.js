@@ -6,7 +6,7 @@ const createVisit = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
-  if(!user) res.status(500).send({msg: "Usuario no autenticado"})
+  if(!user) return res.status(500).send({msg: "Usuario no autenticado"})
 
   const errors = validationResult(req)
 
@@ -16,7 +16,7 @@ const createVisit = async (req, res) => {
 
   const idbuild = await prisma.user({id: user.id}).build().deps({where: { num: req.body.depto }})
   
-  if( idbuild.length == 0 ) res.status(500).send({msg: "Departamento no encontrado"})
+  if( idbuild.length == 0 ) return res.status(500).send({msg: "Departamento no encontrado"})
 
   const visit = await prisma.createVisit({
     person: {
@@ -27,8 +27,8 @@ const createVisit = async (req, res) => {
     }
   })
 
-  if (visit) res.status(200).send({msg: "Visita Creado"})
-  else res.status(500).send({msg: "Error al crear la Visita"})
+  if (visit) return res.status(200).send({msg: "Visita Creado"})
+  else return res.status(500).send({msg: "Error al crear la Visita"})
 
 }
 

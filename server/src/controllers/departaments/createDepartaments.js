@@ -6,9 +6,9 @@ const createDepartaments = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
-  if (!user) res.status(500).send({ msg: "Usuario no autenticado" })
+  if (!user) return res.status(500).send({ msg: "Usuario no autenticado" })
 
-  if (user.role != "SUPERADMIN") res.status(500).send({ msg: "Usuario no autorizado" })
+  if (user.role != "SUPERADMIN") return res.status(500).send({ msg: "Usuario no autorizado" })
 
   const errors = validationResult(req)
 
@@ -27,10 +27,10 @@ const createDepartaments = async (req, res) => {
       }
     })
 
-    if (createDepartament) res.status(200).send({msg: "Departamento Creado"})
-    else res.status(500).send({msg: "Error al crear el Departamento"})
+    if (createDepartament) return res.status(200).send({msg: "Departamento Creado"})
+    else return res.status(500).send({msg: "Error al crear el Departamento"})
 
-  } else { res.status(500).send({msg: "Departamento ya existente"}) }
+  } else { return res.status(500).send({msg: "Departamento ya existente"}) }
 
 }
 

@@ -12,18 +12,18 @@ const getBuildings = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
-  if (!user) res.status(500).send({ msg: "Usuario no autenticado" })
+  if (!user) return res.status(500).send({ msg: "Usuario no autenticado" })
 
   if (user.role == "ADMIN" || user.role == "SUPERADMIN") {  
 
     const buildings = await prisma.buildings().$fragment(fragment)
 
-    if (buildings) res.status(200).send({buildings})
-    else res.status(500).send({msg: "Error al obtener el Edificio"})
+    if (buildings) return res.status(200).send({buildings})
+    else return res.status(500).send({msg: "Error al obtener el Edificio"})
 
   } else {
 
-    res.status(500).send({ msg: "Usuario no autorizado" })
+    return res.status(500).send({ msg: "Usuario no autorizado" })
   }
 }
 

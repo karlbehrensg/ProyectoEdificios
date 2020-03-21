@@ -17,14 +17,14 @@ const login = async (req, res) => {
 
     user = await prisma.user({ username: req.body.email })
     
-    if(!user) res.status(500).send({msg: "Error: Usuario no existente"})
+    if(!user) return res.status(500).send({msg: "Error: Usuario no existente"})
   }
 
-  if(user && !user.state) res.status(500).send({msg: "Error: Usuario no activo"})
+  if(user && !user.state) return res.status(500).send({msg: "Error: Usuario no activo"})
 
   const valid = await bcrypt.compare(req.body.password, user.password)
 
-  if(!valid) res.status(500).send({msg: "Contraseña incorrecta"})
+  if(!valid) return res.status(500).send({msg: "Contraseña incorrecta"})
 
   const auth = await prisma.createAuthUser({
     state: true,
@@ -33,7 +33,7 @@ const login = async (req, res) => {
     }
   })
 
-  if( user && valid && auth ) res.status(200).send({hash: await jwt(user), role: user.role, sesion: auth.id})
+  if( user && valid && auth ) return res.status(200).send({hash: await jwt(user), role: user.role, sesion: auth.id})
 
 }
 

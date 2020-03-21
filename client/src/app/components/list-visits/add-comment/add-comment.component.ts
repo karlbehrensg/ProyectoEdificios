@@ -36,12 +36,14 @@ export class DialogAddComment {
         this._snackBar.open('Observacion agregada', 'OK', {
           duration: this.durationInSeconds * 1000,
         });
+        this.dialogRef.close();
       },
       error => {
         this._snackBar.open('Error al crear Observacion', 'OK', {
           duration: this.durationInSeconds * 1000,
         });
         this.loading = false
+        this.dialogRef.close();
       }
     )
   }

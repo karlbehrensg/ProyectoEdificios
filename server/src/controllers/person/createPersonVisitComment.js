@@ -6,7 +6,7 @@ const createPersonVisitComment = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
-  if (!user) res.status(500).send({ msg: "Usuario no autenticado" })
+  if (!user) return res.status(500).send({ msg: "Usuario no autenticado" })
 
   if (user.role == "ADMIN" || user.role == "BUILD") {
 
@@ -23,12 +23,12 @@ const createPersonVisitComment = async (req, res) => {
       }
     })
 
-    if (comment) res.status(200).send({ msg: "Observacion creada" })
-    else res.status(500).send({ msg: "Error al crear la observacion" })
+    if (comment) return res.status(200).send({ msg: "Observacion creada" })
+    else return res.status(500).send({ msg: "Error al crear la observacion" })
 
   } else {
 
-    res.status(500).send({ msg: "Usuario no autorizado" })
+    return res.status(500).send({ msg: "Usuario no autorizado" })
   }
 }
 

@@ -38,6 +38,7 @@ import { CreateUserBuildComponent } from './components/create-user-build/create-
 import { ListUsersBuildComponent, DialogListAuth } from './components/list-users-build/list-users-build.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogAddComment } from './components/list-visits/add-comment/add-comment.component';
+import { DialogListComment } from './components/list-visits/list-comment/list-comment.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -58,7 +59,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     CreateUserBuildComponent,
     ListUsersBuildComponent,
     DialogListAuth,
-    DialogAddComment
+    DialogAddComment,
+    DialogListComment
   ],
   imports: [
     NgxMaskModule.forRoot(options),
@@ -88,6 +90,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
   ],
   providers: [RutValidator],
   bootstrap: [AppComponent],
-  entryComponents: [CreatePersonComponent, SnackConfirmationComponent, DialogListAuth, DialogAddComment],
+  entryComponents: [CreatePersonComponent, SnackConfirmationComponent, DialogListAuth, DialogAddComment, DialogListComment],
 })
 export class AppModule { }

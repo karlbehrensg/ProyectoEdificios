@@ -2,7 +2,21 @@ import { prisma } from '../../../generated/prisma-client'
 import { validationResult } from 'express-validator'
 import getUser from '../../services/getUser.services'
 
-const inactiveCommentPerson = async (req, res) => {
+const fragment = `
+  fragment PersonVisitWithComment on PersonVisit {
+    id
+    rut
+    name
+    comment {
+      id
+      desc
+      state
+    }
+    lastName
+  }
+`
+
+const getCommentPerson = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
@@ -16,17 +30,10 @@ const inactiveCommentPerson = async (req, res) => {
       return res.status(500).jsonp(errors.array());
     }
 
-    const comment = await prisma.updateCommentVisit({
-      data: {
-        state: req.body.state
-      },
-      where: {
-        id: req.body.comment
-      }
-    })
+    const comment = await prisma.personVisit({ id: req.body.person }).$fragment(fragment)
 
-    if (comment) return res.status(200).send({ msg: "Observacion Actualizada" })
-    else return res.status(500).send({ msg: "Error al actualizar la observacion" })
+    if (comment) return res.status(200).send({ comment })
+    else return res.status(500).send({ msg: "Error al obtener las observaciones" })
 
   } else {
 
@@ -34,4 +41,4 @@ const inactiveCommentPerson = async (req, res) => {
   }
 }
 
-export default inactiveCommentPerson
+export default getCommentPerson

@@ -6,9 +6,9 @@ const inactiveDep = async (req, res) => {
 
 	const user = getUser(req.headers.authorization)
 
-	if (!user) res.status(500).send({ msg: "Usuario no autenticado" })
+	if (!user) return res.status(500).send({ msg: "Usuario no autenticado" })
 
-	if (user.role != "ADMIN") res.status(500).send({ msg: "Usuario no autorizado" })
+	if (user.role != "ADMIN") return res.status(500).send({ msg: "Usuario no autorizado" })
 
 	const errors = validationResult(req)
 
@@ -23,8 +23,8 @@ const inactiveDep = async (req, res) => {
 		}
 	})
 
-	if (inactive) res.status(200).send({msg: "Departamento de persona inactivada"})
-	else res.status(500).send({msg: "Error en la inactivacion del residente"})
+	if (inactive) return res.status(200).send({msg: "Departamento de persona inactivada"})
+	else return res.status(500).send({msg: "Error en la inactivacion del residente"})
 }
 
 export default inactiveDep

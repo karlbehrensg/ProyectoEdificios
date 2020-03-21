@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddComment } from './add-comment/add-comment.component';
+import { DialogListComment } from './list-comment/list-comment.component';
 
 export interface VisitInterface {
   date: String;
@@ -44,11 +45,9 @@ export class ListVisitsComponent implements OnInit {
     this._visitService.getListVisit().subscribe(
       response => {
         this.loading = false
-        console.log(response)
         this.dataSource = new MatTableDataSource(response.visits);
       },
       error => {
-        console.log(error)
         this.loading = false
       },
       () => {
@@ -104,6 +103,9 @@ export class ListVisitsComponent implements OnInit {
   }
 
   listComment(id) {
-
+    const dialogRef = this.dialog.open(DialogListComment, {
+      width: '1000px',
+      data: { id }
+    });
   }
 }

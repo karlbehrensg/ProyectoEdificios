@@ -6,9 +6,9 @@ const createBuilding = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
-  if (!user) res.status(500).send({ msg: "Usuario no autenticado" })
+  if (!user) return res.status(500).send({ msg: "Usuario no autenticado" })
 
-  if (user.role != "SUPERADMIN") res.status(500).send({ msg: "Usuario no autorizado" })
+  if (user.role != "SUPERADMIN") return res.status(500).send({ msg: "Usuario no autorizado" })
 
   const errors = validationResult(req)
 
@@ -24,10 +24,10 @@ const createBuilding = async (req, res) => {
       title: req.body.title,
     })
 
-    if (createbuild) res.status(200).send({msg: "Edificio Creado"})
-    else res.status(500).send({msg: "Error al crear el Edificio"})
+    if (createbuild) return res.status(200).send({msg: "Edificio Creado"})
+    else return res.status(500).send({msg: "Error al crear el Edificio"})
 
-  } else { res.status(500).send({msg: "Edificio ya existente"}) }
+  } else { return res.status(500).send({msg: "Edificio ya existente"}) }
 
 }
 

@@ -6,9 +6,9 @@ const createPersonDep = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
-  if(!user) res.status(500).send({msg: "Usuario no autenticado"})
+  if(!user) return res.status(500).send({msg: "Usuario no autenticado"})
 
-  if (user.role != "ADMIN") res.status(500).send({ msg: "Usuario no autorizado" })
+  if (user.role != "ADMIN") return res.status(500).send({ msg: "Usuario no autorizado" })
 
   const errors = validationResult(req)
 
@@ -18,11 +18,11 @@ const createPersonDep = async (req, res) => {
 
   const validePerson = await prisma.person({rut: req.body.rut})
 
-  if(validePerson) res.status(500).send({msg: "Error: El residente ya existe"})
+  if(validePerson) return res.status(500).send({msg: "Error: El residente ya existe"})
 
   const dep = await prisma.user({id: user.id}).build().deps({where: { num: req.body.dep }})
   
-  if( dep.length == 0 ) res.status(500).send({msg: "Error: El departamento no existe"})
+  if( dep.length == 0 ) return res.status(500).send({msg: "Error: El departamento no existe"})
   
   const person = await prisma.createPerson({
     rut: req.body.rut,
@@ -42,8 +42,8 @@ const createPersonDep = async (req, res) => {
     }
   })
 
-  if (person) res.status(200).send({msg: "Persona Creado"})
-  else res.status(500).send({msg: "Error al crear la Persona"})
+  if (person) return res.status(200).send({msg: "Persona Creado"})
+  else return res.status(500).send({msg: "Error al crear la Persona"})
 }
 
 export default createPersonDep

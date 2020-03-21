@@ -39,4 +39,13 @@ export class PersonService {
     return this._http.post(this.url + '/createCommentPerson', data, { headers: new HttpHeaders({'Authorization': token})})
   }
 
+  getCommentPerson(data: String): Observable<any>{
+    const token = localStorage.getItem('token');
+    return this._http.post(this.url + '/getCommentPerson', { person: data }, { headers: new HttpHeaders({'Authorization': token})})
+  }
+
+  inactiveComment(data: String, state: Boolean): Observable<any>{
+    const token = localStorage.getItem('token');
+    return this._http.post(this.url + '/inactiveComment', { comment: data, state: state }, { headers: new HttpHeaders({'Authorization': token})})
+  }
 }

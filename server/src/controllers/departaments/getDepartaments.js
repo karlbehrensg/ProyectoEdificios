@@ -5,16 +5,16 @@ const getDepartaments = async (req, res) => {
   
   const user = getUser(req.headers.authorization)
 
-  if(!user) res.status(500).send({response: "Usuario no valido"})
+  if(!user) return res.status(500).send({response: "Usuario no valido"})
 
   const idbuild = await prisma.user({id: user.id}).build()
 
-  if(!idbuild) res.status(500).send({response: "Edificio no encontrado"})
+  if(!idbuild) return res.status(500).send({response: "Edificio no encontrado"})
   
   const departaments = await prisma.departaments({ where: { building: { id : idbuild.id }}})
 
-  if (departaments) res.status(200).send({departaments})
-  else res.status(500).send({response: "Error al obtener los Departamentos"})
+  if (departaments) return res.status(200).send({departaments})
+  else return res.status(500).send({response: "Error al obtener los Departamentos"})
 }
 
 export default getDepartaments

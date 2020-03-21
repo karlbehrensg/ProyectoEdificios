@@ -6,9 +6,9 @@ const inactiveUser = async (req, res) => {
 
 	const user = getUser(req.headers.authorization)
 
-	if (!user) res.status(500).send({ msg: "Usuario no autenticado" })
+	if (!user) return res.status(500).send({ msg: "Usuario no autenticado" })
 
-	if (user.role != "ADMIN") res.status(500).send({ msg: "Usuario no autorizado" })
+	if (user.role != "ADMIN") return res.status(500).send({ msg: "Usuario no autorizado" })
 
 	const errors = validationResult(req)
 
@@ -23,8 +23,8 @@ const inactiveUser = async (req, res) => {
 		}
 	})
 
-	if (inactive) res.status(200).send({msg: "Usuario Actualizado"})
-	else res.status(500).send({msg: "Error al actualizar el Usuario"})
+	if (inactive) return res.status(200).send({msg: "Usuario Actualizado"})
+	else return res.status(500).send({msg: "Error al actualizar el Usuario"})
 }
 
 export default inactiveUser
