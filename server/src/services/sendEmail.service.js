@@ -6,7 +6,7 @@ export const mail = async (data) => {
     service: 'gmail',
     auth: {
       user: 'm.gutierrez06@ufromail.cl',
-      pass: '28737777'
+      pass: '...........'
     }
   });
 
