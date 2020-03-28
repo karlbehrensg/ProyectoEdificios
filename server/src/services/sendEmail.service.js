@@ -6,17 +6,19 @@ export const mail = async (data) => {
     service: 'gmail',
     auth: {
       user: 'm.gutierrez06@ufromail.cl',
-      pass: '...........'
+      pass: '28737777'
     }
   });
 
-  let info = await transporter.sendMail({
-    from: 'm.gutierrez06@ufromail.cl',
-    to: "testmatiigl@gmail.com",
-    subject: "Hello ✔",
-    text: "Hello world?",
-    html: "<b>Hello world?</b>"
-  });
-
-  console.log("Message sent: %s", info.messageId);
+  for (let index = 0; index < data.length; index++) {
+    let info = await transporter.sendMail({
+      from: 'm.gutierrez06@ufromail.cl',
+      to: data[index].person.email,//testmatiigl@gmail.com
+      subject: "Encomienda",
+      text: "Recepcion de Encomienda",
+      html: "<b>En la recepcion se encuentra una encomienda a su nombre</b>"
+    });
+  
+    console.log("Message sent: %s", info.messageId);
+  }
 }

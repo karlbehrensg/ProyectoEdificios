@@ -13,7 +13,7 @@ import { SnackConfirmationComponent } from '../snack-confirmation/snack-confirma
 export class LoginComponent implements OnInit {
 
   public login: any;
-  public loading: Boolean
+  public loading: Boolean;
   public durationInSeconds = 5;
 
   constructor(
@@ -60,11 +60,8 @@ export class LoginComponent implements OnInit {
       },
       error => {
         this.loading = false
-        if(error.status == 500 && error.error.response == null) {
-          this.loading = false
-          this.openSnackBar({error: error.error})
-        } else {
-          this._snackBar.open(error.error.response, 'OK', {
+        if(error.status == 500 && error.error.msg != null) {
+          this._snackBar.open(error.error.msg, 'OK', {
             duration: this.durationInSeconds * 1000,
           });
         }

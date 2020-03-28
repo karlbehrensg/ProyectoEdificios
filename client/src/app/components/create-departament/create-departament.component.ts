@@ -56,7 +56,7 @@ export class CreateDepartamentComponent implements OnInit {
     this._departamentService.createDepartament(this.departamentForm.value).subscribe(
       response => {
         this.loading = false
-        this._snackBar.open('Creacion de Departament exitosa', 'OK', {
+        this._snackBar.open(response.msg, 'OK', {
           duration: this.durationInSeconds * 1000,
         });
       },

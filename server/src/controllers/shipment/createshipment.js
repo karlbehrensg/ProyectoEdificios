@@ -3,11 +3,21 @@ import getUser from '../../services/getUser.services'
 import { validationResult } from 'express-validator'
 import { mail } from '../../services/sendEmail.service'
 
+const fragment = `
+  fragment PersonsWithBuild on PersonDep {
+    person {
+      email
+    }
+  }
+`
+
 const createshipment = async (req, res) => {
 
   const user = getUser(req.headers.authorization)
 
   if(!user) return res.status(500).send({msg: "Usuario no autenticado"})
+
+  if (user.role != "BUILD") return res.status(500).send({ msg: "Usuario no autorizado" })
 
   const errors = validationResult(req)
 
@@ -38,12 +48,14 @@ const createshipment = async (req, res) => {
       dep: {
         connect: { id: idbuild[0].id}
       },
-      user: { 
+      user: {
         connect: { id: user.id }
       }
     })
 
-    if(shipment) mail("hola")
+    const owners = await prisma.personDeps({ where: { state: true, dep: { id: idbuild[0].id } }}).$fragment(fragment)
+
+    if(shipment) mail(owners)
 
     if (shipment) return res.status(200).send({msg: "Encomienda Creado"})
     else return res.status(500).send({msg: "Error al crear la Visita"})
@@ -67,7 +79,9 @@ const createshipment = async (req, res) => {
       }
     })
 
-    if(shipment) mail("hola")
+    const owners = await prisma.personDeps({ where: { state: true, dep: { id: idbuild[0].id } }}).$fragment(fragment)
+
+    if(shipment) mail(owners)
 
     if (shipment) return res.status(200).send({msg: "Encomienda Creado"})
     else return res.status(500).send({msg: "Error al crear la Visita"})

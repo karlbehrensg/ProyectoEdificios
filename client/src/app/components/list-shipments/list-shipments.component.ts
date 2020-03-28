@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 
 export interface ShipmentInterface {
   description: string;
-  date: string;
+  date: Date;
   dep: DeptoInterface;
   person: PersonInterface;
 }
@@ -50,7 +50,7 @@ export class ListShipmentsComponent implements OnInit {
       },
       () => {
         this.dataSource.filterPredicate = (data, filter) => {
-          const dataStr = data.date.toLowerCase() + data.description.toLowerCase() + data.person.rut.toLowerCase() + data.person.name.toLowerCase() + data.dep.num.toLowerCase();
+          const dataStr = new Date(data.date).toLocaleTimeString() + new Date(data.date).toLocaleDateString() + data.description.toLowerCase() + data.person.rut.toLowerCase() + data.person.name.toLowerCase() + data.dep.num.toLowerCase();
           return dataStr.indexOf(filter) != -1;
         }
       }
@@ -71,7 +71,7 @@ export class ListShipmentsComponent implements OnInit {
 
   selectChecked(data: String[], shipment: ShipmentInterface): String {
 
-    var dataftr = ''
+    var dataftr = new Date(shipment.date).toLocaleTimeString() + new Date(shipment.date).toLocaleDateString()
 
     for (let index = 0; index < data.length; index++) {
       

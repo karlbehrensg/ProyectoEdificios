@@ -6,7 +6,7 @@ var api = express.Router()
 
 api.post('/createDepartaments', [
     check('num', 'name is required')
-      .isLength({min: 1, max: 8}),
+      .isLength({min: 1}),
     check('build', 'build is required')
       .isLength({min: 20, max: 40})
     ],

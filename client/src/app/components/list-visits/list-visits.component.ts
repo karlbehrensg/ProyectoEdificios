@@ -7,7 +7,7 @@ import { DialogAddComment } from './add-comment/add-comment.component';
 import { DialogListComment } from './list-comment/list-comment.component';
 
 export interface VisitInterface {
-  date: String;
+  date: Date;
   person: PersonInterface;
   depto: DeptoInterface;
 }
@@ -52,7 +52,7 @@ export class ListVisitsComponent implements OnInit {
       },
       () => {
         this.dataSource.filterPredicate = (data, filter) => {
-          const dataStr = data.date.toLowerCase() + data.person.rut.toLowerCase() + data.person.name.toLowerCase() + data.depto.num.toLowerCase();
+          const dataStr = new Date(data.date).toLocaleTimeString() + new Date(data.date).toLocaleDateString() + data.person.rut.toLowerCase() + data.person.name.toLowerCase() + data.depto.num.toLowerCase();
           return dataStr.indexOf(filter) != -1; 
         }
       }
@@ -73,7 +73,7 @@ export class ListVisitsComponent implements OnInit {
 
   selectChecked(data: String[], visit: VisitInterface): String {
 
-    var dataftr = ''
+    var dataftr = new Date(visit.date).toLocaleTimeString() + new Date(visit.date).toLocaleDateString();
 
     for (let index = 0; index < data.length; index++) {
       

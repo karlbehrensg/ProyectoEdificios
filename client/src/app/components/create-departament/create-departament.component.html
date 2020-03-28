@@ -7,7 +7,7 @@
     <span matPrefix>
       <mat-icon matSuffix>apartment</mat-icon> &nbsp;
     </span>
-    <input matInput placeholder="Numero Departamento" formControlName="num" required>
+    <textarea matInput placeholder="Numero Departamento" formControlName="num" required></textarea>
     <mat-error *ngIf="num.errors?.required">
       Numero es <strong>requerido</strong>
     </mat-error>

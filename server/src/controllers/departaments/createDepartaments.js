@@ -16,22 +16,34 @@ const createDepartaments = async (req, res) => {
     return res.status(500).jsonp(errors.array())
   }
 
-  const departaments = await prisma.departaments({ where: { num: req.body.num, building: { id: req.body.build } } })
+  const numDepArray = String(req.body.num).split(",")
+  var okStatus = ""
+  var errorStatus = ""
 
-  if (departaments.length == 0) {
+  for (let index = 0; index < numDepArray.length; index++) {
 
-    const createDepartament = await prisma.createDepartament({
-      num: req.body.num,
-      building: {
-        connect: { id: req.body.build }
-      }
-    })
+    const departaments = await prisma.departaments({ where: { num: numDepArray[index], building: { id: req.body.build } } })
 
-    if (createDepartament) return res.status(200).send({msg: "Departamento Creado"})
-    else return res.status(500).send({msg: "Error al crear el Departamento"})
+    if (departaments.length == 0) {
 
-  } else { return res.status(500).send({msg: "Departamento ya existente"}) }
+      const createDepartament = await prisma.createDepartament({
+        num: numDepArray[index],
+        building: {
+          connect: { id: req.body.build }
+        }
+      })
 
+      if(createDepartament) okStatus += "Nº " + numDepArray[index] + " "
+
+    } else {
+      
+      errorStatus += "Nº " + numDepArray[index] + " "
+    }
+  }
+
+  if(okStatus != "" && errorStatus == "" ) { return res.status(200).send({msg: "Los departamentos " + "[" + okStatus + "]" + " han sido creados"}) }
+  if(okStatus != "" && errorStatus != "" ) { return res.status(500).send({msg: "Departamentos " + "[" + errorStatus + "]" + " ya existen. Departamentos " + "[" + okStatus + "]" + " han sido creados"}) }
+  if(errorStatus != "" && okStatus == "" ) { return res.status(500).send({msg: "Departamentos " + "[" + errorStatus + "]" + " ya existen"}) }
 }
 
 export default createDepartaments

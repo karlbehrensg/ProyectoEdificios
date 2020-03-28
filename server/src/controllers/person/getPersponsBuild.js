@@ -24,6 +24,8 @@ const getPersponsBuild = async (req, res) => {
 
   if(!user) return res.status(500).send({msg: "Usuario no autenticado"})
 
+  if (user.role != "ADMIN") return res.status(500).send({ msg: "Usuario no autorizado" })
+
   const idbuild = await prisma.user({id: user.id}).build()
 
   if(!idbuild) return res.status(500).send({msg: "Edificio no encontrado"})

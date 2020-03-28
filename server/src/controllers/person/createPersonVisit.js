@@ -8,6 +8,8 @@ const createPersonVisit = async (req, res) => {
 
   if(!user) return res.status(500).send({msg: "Usuario no autenticado"})
 
+  if (user.role != "BUILD") return res.status(500).send({ msg: "Usuario no autorizado" })
+
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
