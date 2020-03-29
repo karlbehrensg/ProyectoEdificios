@@ -22,17 +22,18 @@ const getShipmentsBuild = async (req, res) => {
 
   if(!user) return res.status(500).send({msg: "Usuario no autenticado"})
 
-  if (user.role != "BUILD") return res.status(500).send({ msg: "Usuario no autorizado" })
+  if (user.role == "BUILD" || user.role == "ADMIN") {
 
-  const idbuild = await prisma.user({id: user.id}).build()
+    const idbuild = await prisma.user({id: user.id}).build()
 
-  if(!idbuild) return res.status(500).send({msg: "Edificio no encontrado"})
-  
-  const shipments = await prisma.shipments({ where: { dep : { building: { id : idbuild.id} }}, orderBy: 'date_DESC'}).$fragment(fragment)
+    if(!idbuild) return res.status(500).send({msg: "Edificio no encontrado"})
+    
+    const shipments = await prisma.shipments({ where: { dep : { building: { id : idbuild.id} }}, orderBy: 'date_DESC'}).$fragment(fragment)
 
-  if (shipments) return res.status(200).send({shipments})
-  else return res.status(500).send({msg: "Error al crear la Visita"})
-
+    if (shipments) return res.status(200).send({shipments})
+    else return res.status(500).send({msg: "Error al crear la Visita"})
+    
+  } else return res.status(500).send({ msg: "Usuario no autorizado" })
 }
 
 export default getShipmentsBuild

@@ -30,13 +30,13 @@ const routes: Routes = [
   {
     path: 'registrarVisita', 
     component: VisitComponent,
-    canActivate: [UserGuard],
+    canActivate: [AdminUserGuard],
     data: {animation: 'Visita'}
   },
   {
     path: 'registrarEncomienda',
     component: CreateShipmentComponent,
-    canActivate: [UserGuard],
+    canActivate: [AdminUserGuard],
     data: {animation: 'Encomienda'}
   },
   {
@@ -54,7 +54,7 @@ const routes: Routes = [
   {
     path: 'listaEncomiendas',
     component: ListShipmentsComponent,
-    canActivate: [UserGuard],
+    canActivate: [AdminUserGuard],
     data: {animation: 'ListaEncomienda'}
   },
   {
