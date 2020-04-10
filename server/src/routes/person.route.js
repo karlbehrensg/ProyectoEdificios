@@ -35,7 +35,9 @@ api.post('/createPersonVisit', [
     .isLength({min: 3, max: 10}),
   check('dep', 'dep is requried')
     .isLength({min: 2, max: 5}),
-  ], 
+  check('obs', 'obs is required')
+    .isBoolean(),
+  ],
   PersonController.createPersonVisit)
 
 api.post('/getPerponsBuild', PersonController.getPersponsBuild)

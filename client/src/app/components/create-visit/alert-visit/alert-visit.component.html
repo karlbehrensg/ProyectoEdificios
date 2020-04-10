@@ -1,0 +1,14 @@
+<div class="example-card">
+  <div class="tittle">
+    <h3>Esta Visita tiene una observacion</h3>
+  </div>
+  <div class="row space">
+    <button class="btn" (click)="dismiss()" mat-raised-button>
+      <p>Cancelar</p>
+    </button>
+    <button class="btn" [disabled]="loading" (click)="createVisit()" mat-raised-button>
+      <p *ngIf="!loading">Registrar</p>
+      <mat-spinner class="spinner" diameter="20" *ngIf="loading"></mat-spinner>
+    </button>
+  </div>
+</div>

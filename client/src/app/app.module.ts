@@ -40,6 +40,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogAddComment } from './components/list-visits/add-comment/add-comment.component';
 import { DialogListComment } from './components/list-visits/list-comment/list-comment.component';
 import { AssignResidentComponent } from './components/assign-resident/assign-resident.component';
+import { AlertVisitComponent } from './components/create-visit/alert-visit/alert-visit.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -62,7 +63,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     DialogListAuth,
     DialogAddComment,
     DialogListComment,
-    AssignResidentComponent
+    AssignResidentComponent,
+    AlertVisitComponent
   ],
   imports: [
     NgxMaskModule.forRoot(options),
@@ -92,6 +94,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
   ],
   providers: [RutValidator],
   bootstrap: [AppComponent],
-  entryComponents: [CreatePersonComponent, SnackConfirmationComponent, DialogListAuth, DialogAddComment, DialogListComment],
+  entryComponents: [CreatePersonComponent, SnackConfirmationComponent, DialogListAuth, DialogAddComment, DialogListComment, AlertVisitComponent],
 })
 export class AppModule { }

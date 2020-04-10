@@ -20,9 +20,12 @@ const createPersonVisit = async (req, res) => {
     
     if( validePerson ) {
 
-      const comments = await prisma.commentVisits({where: { person: { id: validePerson.id }, state: true }})
+      if( req.body.obs == true ) {
+        
+        const comments = await prisma.commentVisits({where: { person: { id: validePerson.id }, state: true }})
 
-      if(comments != null) return res.status(500).send({msg: "Persona con advertencia"})
+        if( comments != null ) return res.status(500).send({alert: "Persona con advertencia"})
+      }
 
       const idbuild = await prisma.user({id: user.id}).build().deps({where: { num: req.body.dep }})
     
