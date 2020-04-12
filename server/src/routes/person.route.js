@@ -61,6 +61,8 @@ api.post('/inactiveComment', [
 api.post('/getCommentPerson', [
   check('person', 'id person is requried')
     .isLength({min: 10, max: 30}),
+  check('type', 'type is requried')
+    .isLength({min: 4}),
   ],
   PersonController.getCommentPerson)
 

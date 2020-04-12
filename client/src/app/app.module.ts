@@ -41,6 +41,7 @@ import { DialogAddComment } from './components/list-visits/add-comment/add-comme
 import { DialogListComment } from './components/list-visits/list-comment/list-comment.component';
 import { AssignResidentComponent } from './components/assign-resident/assign-resident.component';
 import { AlertVisitComponent } from './components/create-visit/alert-visit/alert-visit.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -90,7 +91,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatProgressBarModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
   ],
   providers: [RutValidator],
   bootstrap: [AppComponent],

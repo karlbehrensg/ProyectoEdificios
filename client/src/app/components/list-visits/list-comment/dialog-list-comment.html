@@ -17,10 +17,10 @@
   <ng-container matColumnDef="function">
     <th mat-header-cell *matHeaderCellDef> </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-button [disabled]="element.state" (click)="active(element.id)">
+      <button mat-button [disabled]="element.state" matTooltip="Activar Observacion" (click)="active(element.id)">
         <mat-icon aria-hidden="false" aria-label="Example home icon">done</mat-icon>
       </button>
-      <button mat-button [disabled]="!element.state" (click)="desactive(element.id)">
+      <button mat-button [disabled]="!element.state" matTooltip="Desactivar Observacion" (click)="desactive(element.id)">
         <mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon>
       </button>
     </td>

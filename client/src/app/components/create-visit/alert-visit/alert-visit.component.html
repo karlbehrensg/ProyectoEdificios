@@ -2,6 +2,25 @@
   <div class="tittle">
     <h3>Esta Visita tiene una observacion</h3>
   </div>
+</div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+      <td mat-cell *matCellDef="let element"> {{element.desc}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let element"> {{element.state ? 'Activo' : 'Desactivo'}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+<div class="example-card">
   <div class="row space">
     <button class="btn" (click)="dismiss()" mat-raised-button>
       <p>Cancelar</p>

@@ -9,11 +9,13 @@ import { PersonService } from 'src/app/services/person.service';
   styleUrls: ['./alert-visit.component.css'],
   providers: [PersonService]
 })
-export class AlertVisitComponent {
+export class AlertVisitComponent implements OnInit {
 
   public obs: any;
   public loading: Boolean
   public durationInSeconds = 5;
+  displayedColumns: string[] = ['descripcion', 'estado'];
+  dataSource: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<AlertVisitComponent>,
@@ -22,16 +24,24 @@ export class AlertVisitComponent {
     private _personService: PersonService) {
 
       this.obs = {
-        rut: this.data.rut,
-        name: this.data.name,
-        lastName: this.data.lastName,
-        patent: this.data.patent,
-        dep: this.data.dep,
+        rut: this.data.person.rut,
+        name: this.data.person.name,
+        lastName: this.data.person.lastName,
+        patent: this.data.person.patent,
+        dep: this.data.person.dep,
         obs: false
       }
 
       this.loading = false
     }
+  
+  ngOnInit() {
+    this._personService.getCommentPerson(this.data.idperson, "ACTIVE").subscribe(
+      response => {
+        this.dataSource = response.comment
+      },
+    )
+  }
   
   createVisit() {
     this.loading = true

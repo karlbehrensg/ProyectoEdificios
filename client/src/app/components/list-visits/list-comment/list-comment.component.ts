@@ -27,7 +27,7 @@ export class DialogListComment implements OnInit{
     private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
-    this._personService.getCommentPerson(this.data.id).subscribe(
+    this._personService.getCommentPerson(this.data.id, "FULL").subscribe(
       response => {
         this.dataSource = response.comment.comment
       },
@@ -37,10 +37,10 @@ export class DialogListComment implements OnInit{
   desactive(id: String) {
     this._personService.inactiveComment(id, false).subscribe(
       response => {
-        this._snackBar.open('Observacion agregada', 'OK', {
+        this._snackBar.open('Observacion desactivada', 'OK', {
           duration: this.durationInSeconds * 1000,
         });
-        this._personService.getCommentPerson(this.data.id).subscribe(
+        this._personService.getCommentPerson(this.data.id, "FULL").subscribe(
           response => {
             this.dataSource = response.comment.comment
           },
@@ -52,10 +52,10 @@ export class DialogListComment implements OnInit{
   active(id: String) {
     this._personService.inactiveComment(id, true).subscribe(
       response => {
-        this._snackBar.open('Observacion agregada', 'OK', {
+        this._snackBar.open('Observacion activada', 'OK', {
           duration: this.durationInSeconds * 1000,
         });
-        this._personService.getCommentPerson(this.data.id).subscribe(
+        this._personService.getCommentPerson(this.data.id, "FULL").subscribe(
           response => {
             this.dataSource = response.comment.comment
           },

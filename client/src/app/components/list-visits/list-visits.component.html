@@ -45,10 +45,10 @@
   <ng-container matColumnDef="function">
     <th mat-header-cell *matHeaderCellDef> </th>
     <td mat-cell *matCellDef="let element"> 
-      <button mat-button (click)="addComment(element.person.id)">
+      <button mat-button matTooltip="Agregar Observacion" (click)="addComment(element.person.id)">
         <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
       </button>
-      <button mat-button (click)="listComment(element.person.id)">
+      <button mat-button matTooltip="Ver Observaciones" (click)="listComment(element.person.id)">
         <mat-icon aria-hidden="false" aria-label="Example home icon">list</mat-icon>
       </button>
     </td>

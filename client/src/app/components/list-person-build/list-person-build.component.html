@@ -48,7 +48,7 @@
   <ng-container matColumnDef="function">
     <th mat-header-cell *matHeaderCellDef> </th>
     <td mat-cell *matCellDef="let element"> 
-      <button mat-button [disabled]="(!element.state)" (click)="desactiveDep(element.id)">
+      <button mat-button matTooltip="Desactivar Residente" [disabled]="(!element.state)" (click)="desactiveDep(element.id)">
         <mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon>
       </button>
     </td>

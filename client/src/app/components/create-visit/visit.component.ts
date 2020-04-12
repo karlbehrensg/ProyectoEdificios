@@ -63,8 +63,11 @@ export class VisitComponent {
         this.loading = false
         if(error.status == 500 && error.error.alert != null) {
           const dialogRef = this.dialog.open(AlertVisitComponent, {
-            width: '600px',
-            data: this.personForm.value
+            width: '1000px',
+            data: { 
+              person: this.personForm.value,
+              idperson: error.error.person
+            }
           });
         }
         if(error.status == 500 && error.error.msg != null) {
