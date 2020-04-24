@@ -5,14 +5,14 @@ import rut from 'validar-rut'
 
 var api = express.Router()
 
-api.post('/createVisit', [
+/*api.post('/createVisit', [
   check('person', 'person is requried').custom(value => {
     return rut.validar(String(value).toUpperCase());
   }),
   check('depto', 'dep is requried')
     .isLength({min: 1, max: 4}),
   ],
-  VisitController.createVisit)
+  VisitController.createVisit)*/
 
 api.get('/getVisitBuild', VisitController.getVisitBuild)
 

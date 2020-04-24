@@ -12,6 +12,6 @@ api.post('/createDepartaments', [
     ],
     DepartamentsController.createDepartaments)
 
-api.post('/departaments', DepartamentsController.getDepartaments)
+//api.post('/departaments', DepartamentsController.getDepartaments)
 
 export default api

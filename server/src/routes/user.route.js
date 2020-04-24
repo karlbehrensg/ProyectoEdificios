@@ -49,7 +49,7 @@ api.post('/logout', [
 ],
 UserController.logout)
 
-api.get('/getUsers', UserController.getUsers)
+//api.get('/getUsers', UserController.getUsers)
 
 api.get('/getUsersBuild', UserController.getUsersBuild)
 
